@@ -1,0 +1,8 @@
+{
+    "Prompt": "from typing import List\n\ndef add(lst: List[int]) -> int:\n    \"\"\"Given a non-empty list of integers lst. add the even elements that are at odd indices..\n\n\n    Examples:\n    >>> add([4, 2, 6, 7])\n    2\n    \"\"\"",
+    "Completions": [
+        "from typing import List\n",
+        "from typing import List\n",
+        "from typing import List\n"
+    ]
+}
