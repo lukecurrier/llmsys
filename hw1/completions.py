@@ -27,17 +27,18 @@ def generate_text(prompt):
     return decoded_output
 
 def generate_and_save_completions(gens_per_prompt=20):
-    if not os.path.exists("completions"):
-                os.makedirs("completions")
-                
+    completions = []
     for i, problem in enumerate(ds):
-        if not os.path.exists(f"completions/{i}"):
-            os.makedirs(f"completions/{i}")
         for j in range(gens_per_prompt):
-            print(i)
-            print(problem['prompt'])
             completion = generate_text(problem['prompt'])
-            with open(f"completions/{i}/completion_{j}.json", "w") as file:
-                json.dump(completion, file, indent=4)
+            completions.append(completion)
+        if not os.path.exists("completions"):
+            os.makedirs("completions")
+        with open(f"completions/completion_{i}.json", "w") as file:
+            json.dump({
+                'Prompt': problem['prompt'],
+                'Completions': completions
+            }, file, indent=4)
+        completions = []
 
 generate_and_save_completions()
