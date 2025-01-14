@@ -26,13 +26,18 @@ def generate_text(prompt):
             break
     return decoded_output
 
-def generate_and_save_completions():
-    for i, problem in enumerate(ds):
-        for _ in range(20):
-            completion = generate_text(problem['prompt'])
-            if not os.path.exists("completions"):
+def generate_and_save_completions(gens_per_prompt=20):
+    if not os.path.exists("completions"):
                 os.makedirs("completions")
-            with open(f"completions/completion_{i}.json", "w") as file:
+                
+    for i, problem in enumerate(ds):
+        if not os.path.exists(f"completions/{i}"):
+            os.makedirs(f"completions/{i}")
+        for j in range(gens_per_prompt):
+            print(i)
+            print(problem['prompt'])
+            completion = generate_text(problem['prompt'])
+            with open(f"completions/{i}/completion_{j}.json", "w") as file:
                 json.dump(completion, file, indent=4)
 
 generate_and_save_completions()
