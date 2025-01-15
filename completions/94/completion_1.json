@@ -1,1 +1,0 @@
-"def starts_one_ends(n: int) -> int:\n    \"\"\"\n    Given a positive integer n, return the count of the numbers of n-digit\n    positive integers that start or end with 1.\n    \"\"\"\n    if n == 1:\n        return 1\n    return 1 + starts_one_ends(n - 1)\n"
