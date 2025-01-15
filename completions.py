@@ -29,14 +29,18 @@ def generate_text(prompt):
             break
     return prompt + generated_text
 
-def generate_and_save_completions(gens_per_prompt=3):
+def generate_and_save_completions(gens_per_prompt=20):
+    if not os.path.exists("completions"):
+            os.makedirs("completions")
     completions = []
     for i, problem in enumerate(ds):
+        if os.path.exists(f"completions/completion_{i}.json"):
+            print(f"Skipping {i}")
+            continue
+        print(f"Generating completion {i}")
         for j in range(gens_per_prompt):
             completion = generate_text(problem['prompt'])
             completions.append(completion)
-        if not os.path.exists("completions"):
-            os.makedirs("completions")
         with open(f"completions/completion_{i}.json", "w") as file:
             json.dump({
                 'Prompt': problem['prompt'],
@@ -45,4 +49,4 @@ def generate_and_save_completions(gens_per_prompt=3):
             }, file, indent=4)
         completions = []
 
-generate_and_save_completions()
+generate_and_save_completions(gens_per_prompt=20)
