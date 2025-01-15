@@ -19,14 +19,17 @@ def generate_text(prompt):
         top_p=None)
     
     decoded_output = tokenizer.decode(outputs[0])
+    prompt_length = len(prompt)
+    generated_text = decoded_output[prompt_length:]
+    
     end_patterns = ["\ndef", "\nclass", "\nif", "\nprint"]
     for end_pattern in end_patterns:
-        if end_pattern in decoded_output:
-            decoded_output = decoded_output.split(end_pattern)[0]
+        if end_pattern in generated_text:
+            generated_text = generated_text.split(end_pattern)[0]
             break
-    return decoded_output
+    return prompt + generated_text
 
-def generate_and_save_completions(gens_per_prompt=20):
+def generate_and_save_completions(gens_per_prompt=3):
     completions = []
     for i, problem in enumerate(ds):
         for j in range(gens_per_prompt):
@@ -37,7 +40,8 @@ def generate_and_save_completions(gens_per_prompt=20):
         with open(f"completions/completion_{i}.json", "w") as file:
             json.dump({
                 'Prompt': problem['prompt'],
-                'Completions': completions
+                'Completions': completions,
+                'Tests': problem['tests']
             }, file, indent=4)
         completions = []
 
