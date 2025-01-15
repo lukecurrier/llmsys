@@ -8,13 +8,12 @@ def execute_tests():
     if not os.path.exists("test_results"):
             os.makedirs("test_results")
     for completion_file in os.listdir("completions"):
-        with open(f"completions/completion_0.json", 'r') as f:
+        with open(f"completions/{completion_file}", 'r') as f:
                 completion_data = json.load(f)
         curr_tests = completion_data['Tests']
         solution_output = []
         for idx, ind_completion in enumerate(completion_data['Completions']):
             with open("temp_test.py", 'w') as f:
-                print(ind_completion)
                 f.write(ind_completion)
                 f.write('\n\n')
                 f.write(curr_tests)
@@ -34,7 +33,7 @@ def execute_tests():
                         'output': result.stdout
                     }
                 else:
-                    total_passed = total_passed + 1
+                    total_tests = total_tests + 1
                     result_data = {
                         'solution_name': f"test_{idx}",
                         'pass': False,
@@ -45,5 +44,6 @@ def execute_tests():
                 return False, "Timeout expired after 5 seconds."
         with open(f"test_results/{completion_file}", 'w') as result_file:
                 json.dump(solution_output, result_file, indent=4)
+    return f"{total_passed/total_tests * 100}% pass rate"
 
-execute_tests()
+print(execute_tests())
