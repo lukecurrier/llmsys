@@ -8,7 +8,15 @@ OG_FLIGHT = load_dataset("nuprl/engineering-llm-systems", name="flights", split=
 
 class Flight:
     def __init__(self, flight_id: int):
-        self.flight_info = OG_FLIGHT[flight_id]
+        self.id = OG_FLIGHT[flight_id]['id']
+        self.date = OG_FLIGHT[flight_id]['date']
+        self.airline = OG_FLIGHT[flight_id]['airline']
+        self.flight_number = OG_FLIGHT[flight_id]['flight_number']
+        self.origin = OG_FLIGHT[flight_id]['origin']
+        self.destination = OG_FLIGHT[flight_id]['destination']
+        self.departure_time = OG_FLIGHT[flight_id]['departure_time']
+        self.arrival_time = OG_FLIGHT[flight_id]['arrival_time']
+        self.available_seats = OG_FLIGHT[flight_id]['available_seats']
     
 def find_flights(origin: str, destination: str, date: datetime.date) -> List[Flight]:
     formatted_date = date.strftime("%Y-%m-%d")
@@ -24,40 +32,18 @@ def book_flight(flight_id: int) -> Optional[int]:
 def run_chat(api_key: str):
     base_url = "https://nerc.guha-anderson.com/v1"
     
-    SYSTEM_PROMPT = """
-    
+    SYSTEM_PROMPT  = """
     We have defined a function called
 
-    def find_flights(origin: str, destination: str, departure_date: datetime.date) -> list[dict]:
+    def find_flights(origin: str, destination: str, departure_date: datetime.date) -> list[Flight]:
 
-    It takes the origin and destination airport codes. And produces a list of dictionaries
-    containing flight information. Stuff like this:
-
-    { 'id': 407,
-    'date': datetime.date(2023, 1, 6),
-    'airline': 'Delta',
-    'flight_number': 'DL9926',
-    'origin': 'ORD',
-    'destination': 'JFK',
-    'departure_time': datetime.time(20, 55),
-    'arrival_time': datetime.time(22, 55),
-    'available_seats': 172}
+    It takes the origin and destination airport codes. And produces a list of Flight objects
+    containing flight information. Each Flight object has the following fields: id, date, airline, flight_number, origin
+    destination, departure_time, arrival_time, and available_seats. 
     
-    When a user asks about the available flights, use the find_flights function to find the list of flights matching the specified
-    origin, destination and date
-    
-    After showing the available flights, if a user chooses one, use the book_flight function as defined below to book the chosen flight:
-    
-    def book_flight(flight_id: int) -> Optional[int]:
-    
-    If the flight booking is succesful, the functino will return the flight id, else it will return None. Inform the user if the booking was
-    succesful or not. 
-    
-    Please return python code with all the above actions.
-    
-    I will run your response code in an environment where find_flights and book_flight are already defined
-    and datetime is already imported. Please do not name any variables flights and do not redefine or mention the definition for find_flights or book_flight.
-    Assume the main function is already defined, do just provide the code inside the main() function.
+    I will run your response code in an environment where find_flights is already defined
+    and datetime is already imported. So please do not define find_flights. Make sure your response code displays the available flights
+    in a user friendly manner that only displays the flight id, departure_time, and available_sears.
     """
 
     client = OpenAI(base_url=base_url, api_key=api_key)
@@ -81,6 +67,7 @@ def run_chat(api_key: str):
         if extracted_code:
             extracted_code = extracted_code.group(1)
             try:
+                #print(extracted_code)
                 print(exec(extracted_code))
             except Exception as e:
                 print(e)
@@ -89,3 +76,4 @@ def run_chat(api_key: str):
             
         
 run_chat(api_key = "ravuri.n@northeastern.edu:81592")
+#What flights are there from Boston to San Francisco on January 6, 2023?
