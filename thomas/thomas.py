@@ -3,8 +3,11 @@ from datasets import load_dataset
 import datetime
 import re
 from typing import List, Optional
+from contextlib import redirect_stdout
+import io
 
 OG_FLIGHT = load_dataset("nuprl/engineering-llm-systems", name="flights", split="train")
+booked_flights = []
 
 class Flight:
     def __init__(self, flight_id: int):
@@ -41,9 +44,16 @@ def run_chat(api_key: str):
     containing flight information. Each Flight object has the following fields: id, date, airline, flight_number, origin
     destination, departure_time, arrival_time, and available_seats. 
     
-    I will run your response code in an environment where find_flights is already defined
-    and datetime is already imported. So please do not define find_flights. Make sure your response code displays the available flights
-    in a user friendly manner that only displays the flight id, departure_time, and available_sears.
+    We have also defined a function called
+
+    book_flight(flight_id: int) -> Optional[int]
+
+    It takes the flight id as input and returns the flight id if the flight has available seats. If the flight
+    does not have available seats, it returns None. 
+    
+    I will run your response code in an environment where find_flights and book_flight is already defined
+    and datetime is already imported. So please do not define find_flights or book_flight. Make sure your response code displays the available flights
+    in a user friendly manner that only displays the flight id, departure_time, and available_seats. 
     """
 
     client = OpenAI(base_url=base_url, api_key=api_key)
@@ -52,7 +62,7 @@ def run_chat(api_key: str):
         user_input = input("User (blank to quit):")
 
         if user_input == "":
-            print("[]")
+            print(booked_flights)
             break
 
         # chatbot logic here
@@ -68,10 +78,17 @@ def run_chat(api_key: str):
             extracted_code = extracted_code.group(1)
             try:
                 #print(extracted_code)
-                print(exec(extracted_code))
+                stdout = io.StringIO()
+                with redirect_stdout(stdout):
+                    exec(extracted_code)
+                print(stdout.getvalue())
+                SYSTEM_PROMPT = SYSTEM_PROMPT + stdout.getvalue()
+                #print(SYSTEM_PROMPT)
             except Exception as e:
+                print("HERE")
                 print(e)
         else:
+            print("wwwHERE")
             print(resp.choices[0].message.content)
             
         
