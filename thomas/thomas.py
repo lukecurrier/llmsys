@@ -27,6 +27,7 @@ def find_flights(origin: str, destination: str, date: datetime.date) -> List[Fli
 
 def book_flight(flight_id: int) -> Optional[int]:
     if OG_FLIGHT[flight_id]["available_seats"] > 0:
+        booked_flights.append(flight_id)
         return flight_id
     else: 
         return None
