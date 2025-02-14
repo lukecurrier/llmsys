@@ -37,6 +37,9 @@ def run_chat(api_key: str):
     base_url = "https://nerc.guha-anderson.com/v1"
     
     SYSTEM_PROMPT  = """
+    You are an AI travel agent named Thomas conversing with a user. If the user requests information about flights, your task is to find and book their flights. You MUST generate code to find and book flights, if requested.
+    Do not display available flights without generating code to do so.
+    Else, politely decline any questions that are not related to flight bookings.
     We have defined a function called
 
     def find_flights(origin: str, destination: str, departure_date: datetime.date) -> list[Flight]:
@@ -52,10 +55,46 @@ def run_chat(api_key: str):
     It takes the flight id as input and returns the flight id if the flight has available seats. If the flight
     does not have available seats, it returns None. 
     
-    I will run your response code in an environment where find_flights and book_flight is already defined
-    and datetime is already imported. So please do not define find_flights or book_flight. Make sure your response code displays the available flights
+    I will run your response code in a dynamic environment where find_flights and book_flight is already defined
+    and datetime is already imported. Do not reimport datetime. Make sure the code you produce is syntactically correct and does not have empty functions. 
+    So please DO NOT redefine the find_flights or book_flight function or provide function signatures for them. Make sure your response code displays the available flights
     in a user friendly manner that only displays the flight id, departure_time, and available_seats. 
     """
+    messages = [
+                { "role": "system", "content": SYSTEM_PROMPT },
+                { "role": "user", "content": "What flights are there from Boston to San Francisco on January 6, 2023?"},
+                { "role": "system", "content": '''flights = find_flights('BOS', 'SFO', datetime.date(2023, 1, 6))
+                        if flights:
+                            print("Available Flights:")
+                            for flight in flights:
+                                print(f"Flight ID: {flight.id}, Departure Time: {flight.departure_time}, Available Seats: {flight.available_seats}")
+                        else:
+                            print("No flights available.")
+
+                        Available Flights:
+                        Flight ID: 474, Departure Time: 05:29, Available Seats: 0
+                        Flight ID: 475, Departure Time: 18:12, Available Seats: 90
+                        Flight ID: 476, Departure Time: 00:17, Available Seats: 0''' },
+                { "role": "user", "content": "can i book the second flight"},
+                { "role": "system", "content": '''booking = book_flight(475)
+                 if booking:
+                    print("Booking for flight {booking} succesful")
+                else:
+                    print("Flight {booking} is unfortunately at full capacity. Please choose a different flight.")''' },
+                { "role": "user", "content": "What flights are there from Boston to EWR on January 6, 2023?"},
+                { "role": "system", "content": '''flights = find_flights('BOS', 'EWR', datetime.date(2023, 1, 6))
+                        if flights:
+                            print("Available Flights:")
+                            for flight in flights:
+                                print(f"Flight ID: {flight.id}, Departure Time: {flight.departure_time}, Available Seats: {flight.available_seats}")
+                        else:
+                            print("No flights available.")
+
+                        Available Flights:
+                        Flight ID: 474, Departure Time: 05:29, Available Seats: 0
+                        Flight ID: 475, Departure Time: 18:12, Available Seats: 90
+                        Flight ID: 476, Departure Time: 00:17, Available Seats: 0''' },
+                ]        
 
     client = OpenAI(base_url=base_url, api_key=api_key)
 
@@ -65,31 +104,28 @@ def run_chat(api_key: str):
         if user_input == "":
             print(booked_flights)
             break
-
+        
+        messages.append({ "role": "user", "content": user_input})
+        
         # chatbot logic here
         resp = client.chat.completions.create(
-            messages = [
-                { "role": "system", "content": SYSTEM_PROMPT },
-                { "role": "user", "content": user_input}
-                ],
+            messages = messages,
             model = "llama3p1-8b-instruct",
             temperature=0)
         extracted_code = re.search(r'```python(.*?)```', resp.choices[0].message.content, re.DOTALL)
         if extracted_code:
             extracted_code = extracted_code.group(1)
             try:
-                #print(extracted_code)
+                print(extracted_code)
                 stdout = io.StringIO()
                 with redirect_stdout(stdout):
                     exec(extracted_code)
                 print(stdout.getvalue())
-                SYSTEM_PROMPT = SYSTEM_PROMPT + stdout.getvalue()
-                #print(SYSTEM_PROMPT)
+                messages.append({ "role": "system", "content":  stdout.getvalue()})
             except Exception as e:
-                print("HERE")
                 print(e)
         else:
-            print("wwwHERE")
+            messages.append({ "role": "system", "content": resp.choices[0].message.content})
             print(resp.choices[0].message.content)
             
         
