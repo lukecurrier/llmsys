@@ -63,37 +63,47 @@ def run_chat(api_key: str):
     messages = [
                 { "role": "system", "content": SYSTEM_PROMPT },
                 { "role": "user", "content": "What flights are there from Boston to San Francisco on January 6, 2023?"},
-                { "role": "system", "content": '''flights = find_flights('BOS', 'SFO', datetime.date(2023, 1, 6))
-                        if flights:
-                            print("Available Flights:")
-                            for flight in flights:
-                                print(f"Flight ID: {flight.id}, Departure Time: {flight.departure_time}, Available Seats: {flight.available_seats}")
-                        else:
-                            print("No flights available.")
-
-                        Available Flights:
-                        Flight ID: 474, Departure Time: 05:29, Available Seats: 0
-                        Flight ID: 475, Departure Time: 18:12, Available Seats: 90
-                        Flight ID: 476, Departure Time: 00:17, Available Seats: 0''' },
+                { "role": "system", "content": '''```python
+flights = find_flights('BOS', 'SFO', datetime.date(2023, 1, 6))
+if flights:
+   print("Available Flights:")
+   for flight in flights:
+        print(f"Flight ID: {flight.id}, Departure Time: {flight.departure_time}, Available Seats: {flight.available_seats}")
+else:
+     print("No flights available.")
+```
+Available Flights:
+Flight ID: 474, Departure Time: 05:29, Available Seats: 0
+Flight ID: 475, Departure Time: 18:12, Available Seats: 90
+Flight ID: 476, Departure Time: 00:17, Available Seats: 0''' },
                 { "role": "user", "content": "can i book the second flight"},
-                { "role": "system", "content": '''booking = book_flight(475)
-                 if booking:
-                    print("Booking for flight {booking} succesful")
-                else:
-                    print("Flight {booking} is unfortunately at full capacity. Please choose a different flight.")''' },
-                { "role": "user", "content": "What flights are there from Boston to EWR on January 6, 2023?"},
-                { "role": "system", "content": '''flights = find_flights('BOS', 'EWR', datetime.date(2023, 1, 6))
-                        if flights:
-                            print("Available Flights:")
-                            for flight in flights:
-                                print(f"Flight ID: {flight.id}, Departure Time: {flight.departure_time}, Available Seats: {flight.available_seats}")
-                        else:
-                            print("No flights available.")
-
-                        Available Flights:
-                        Flight ID: 474, Departure Time: 05:29, Available Seats: 0
-                        Flight ID: 475, Departure Time: 18:12, Available Seats: 90
-                        Flight ID: 476, Departure Time: 00:17, Available Seats: 0''' },
+                { "role": "system", "content": '''```python
+booking = book_flight(475)
+if booking:
+    print(f"Booking for flight {booking} succesful")
+else:
+   print(f"Flight {booking} is unfortunately at full capacity. Please choose a different flight.")''' },
+                { "role": "user", "content": "What flights are there from Boston to EWR on jan 1?"},
+                { "role": "system", "content": '''```python
+flights = find_flights('BOS', 'EWR', datetime.date(2023, 1, 1))
+if flights:
+   print("Available Flights:")
+   for flight in flights:
+        print(f"Flight ID: {flight.id}, Departure Time: {flight.departure_time}, Available Seats: {flight.available_seats}")
+    else:
+        print("No flights available.")
+```
+Available Flights:
+Flight ID: 474, Departure Time: 05:29, Available Seats: 0
+Flight ID: 475, Departure Time: 18:12, Available Seats: 90
+Flight ID: 476, Departure Time: 00:17, Available Seats: 0''' },
+                { "role": "user", "content": "i'll do the first"},
+                { "role": "system", "content": '''```python
+booking = book_flight(474)
+if booking:
+    print(f"Booking for flight {booking} succesful")
+else:
+   print(f"Flight {booking} is unfortunately at full capacity. Please choose a different flight.")''' },
                 ]        
 
     client = OpenAI(base_url=base_url, api_key=api_key)
@@ -105,6 +115,7 @@ def run_chat(api_key: str):
             print(booked_flights)
             break
         
+        #Append the message the user asked to the log
         messages.append({ "role": "user", "content": user_input})
         
         # chatbot logic here
@@ -116,12 +127,14 @@ def run_chat(api_key: str):
         if extracted_code:
             extracted_code = extracted_code.group(1)
             try:
-                print(extracted_code)
+                #print(extracted_code)
                 stdout = io.StringIO()
                 with redirect_stdout(stdout):
                     exec(extracted_code)
                 print(stdout.getvalue())
-                messages.append({ "role": "system", "content":  stdout.getvalue()})
+                # Append the system's answer and code to the log
+                messages.append({ "role": "system", "content":  resp.choices[0].message.content + stdout.getvalue()})
+                #print(messages)
             except Exception as e:
                 print(e)
         else:
