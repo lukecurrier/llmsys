@@ -74,6 +74,7 @@ def run_chat(api_key: str):
                 ],
             model = "llama3p1-8b-instruct",
             temperature=0)
+        print(resp)
         extracted_code = re.search(r'```python(.*?)```', resp.choices[0].message.content, re.DOTALL)
         if extracted_code:
             extracted_code = extracted_code.group(1)
@@ -82,16 +83,16 @@ def run_chat(api_key: str):
                 stdout = io.StringIO()
                 with redirect_stdout(stdout):
                     exec(extracted_code)
-                print(stdout.getvalue())
+                #print(stdout.getvalue())
                 SYSTEM_PROMPT = SYSTEM_PROMPT + stdout.getvalue()
-                #print(SYSTEM_PROMPT)
+                print(SYSTEM_PROMPT)
             except Exception as e:
-                print("HERE")
+                #print("HERE")
                 print(e)
         else:
-            print("wwwHERE")
+            #print("wwwHERE")
             print(resp.choices[0].message.content)
             
-        
+
 run_chat(api_key = "ravuri.n@northeastern.edu:81592")
 #What flights are there from Boston to San Francisco on January 6, 2023?
