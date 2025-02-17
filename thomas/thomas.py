@@ -39,7 +39,6 @@ def run_chat(api_key: str):
     SYSTEM_PROMPT  = """
     You are an AI travel agent named Thomas conversing with a user. If the user requests information about flights, your task is to find and book their flights. You MUST generate code to find and book flights, if requested.
     Do not display available flights without generating code to do so.
-    Else, politely decline any questions that are not related to flight bookings.
     We have defined a function called
 
     def find_flights(origin: str, destination: str, departure_date: datetime.date) -> list[Flight]:
@@ -82,8 +81,8 @@ booking = book_flight(475)
 if booking:
     print(f"Booking for flight {booking} succesful")
 else:
-   print(f"Flight {booking} is unfortunately at full capacity. Please choose a different flight.")''' },
-                { "role": "user", "content": "What flights are there from Boston to EWR on jan 1?"},
+   print(f"Flight is unfortunately at full capacity. Please choose a different flight.")''' },
+                { "role": "user", "content": "What are the flights from Boston to EWR on jan 1?"},
                 { "role": "system", "content": '''```python
 flights = find_flights('BOS', 'EWR', datetime.date(2023, 1, 1))
 if flights:
@@ -103,7 +102,7 @@ booking = book_flight(474)
 if booking:
     print(f"Booking for flight {booking} succesful")
 else:
-   print(f"Flight {booking} is unfortunately at full capacity. Please choose a different flight.")''' },
+   print(f"Flight is unfortunately at full capacity. Please choose a different flight.")''' },
                 ]        
 
     client = OpenAI(base_url=base_url, api_key=api_key)
