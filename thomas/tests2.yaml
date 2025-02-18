@@ -1,29 +1,29 @@
-# - user_messages:
-#     - "What are the flights from BOS to SFO on January 6?"
-#     - "Thanks, that's all."
-#     - ""
-#   expected_result: []
-# - user_messages:
-#     - What flights are there from the MA capital to the bay area on the last day of january?
-#     - Book the second one.
-#   expected_result: [2631]
-# - user_messages:
-#     - Can you book me a train trip from boston to nyc on january 10th?
-#     - Book the first one.
-#   expected_result: []
-# - user_messages:
-#    - what flights are there from boston to san francisco on december 29?
-#    - Book the one that's earliest in the day.
-#   expected_result: [31382]
-# - user_messages:
-#     - What are the flights from BOS to SFO on February 11?
-#     - Book the two earliest ones.
-#   expected_result: [3584, 3585]
-# - user_messages:
-#     - What are the flights from BOS to SFO on February 5?
-#     - Book flights 3069 and 3067 please!
-#     - Now book flight 3068.
-#   expected_result: [3069, 3067]
+- user_messages:
+    - "What are the flights from BOS to SFO on January 6?"
+    - "Thanks, that's all."
+    - ""
+  expected_result: []
+- user_messages:
+    - What flights are there from the MA capital to the bay area on the last day of january?
+    - Book the second one.
+  expected_result: [2631]
+- user_messages:
+    - Can you book me a train trip from boston to nyc on january 10th?
+    - Book the first one.
+  expected_result: []
+- user_messages:
+   - what flights are there from boston to san francisco on december 29?
+   - Book the one that's earliest in the day.
+  expected_result: [31382]
+- user_messages:
+    - What are the flights from BOS to SFO on February 11?
+    - Book the two earliest ones.
+  expected_result: [3584, 3585]
+- user_messages:
+    - What are the flights from BOS to SFO on February 5?
+    - Book flights 3069 and 3067 please!
+    - Now book flight 3068.
+  expected_result: [3069, 3067]
 - user_messages: 
     - Are there any flights from JFK to denver on october 9?
     - Book it.
