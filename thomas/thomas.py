@@ -5,6 +5,8 @@ import re
 from typing import List, Optional
 from contextlib import redirect_stdout
 import io
+import sys
+import argparse
 
 OG_FLIGHT = load_dataset("nuprl/engineering-llm-systems", name="flights", split="train")
 booked_flights = []
@@ -33,7 +35,7 @@ def book_flight(flight_id: int) -> Optional[int]:
         return None
 
 
-def run_chat(api_key: str):
+def run_chat(api_key: str, model: str):
     base_url = "https://nerc.guha-anderson.com/v1"
     
     SYSTEM_PROMPT  = """
@@ -93,12 +95,12 @@ if flights:
         print("No flights available.")
 ```
 Available Flights:
-Flight ID: 474, Departure Time: 05:29, Available Seats: 0
-Flight ID: 475, Departure Time: 18:12, Available Seats: 90
-Flight ID: 476, Departure Time: 00:17, Available Seats: 0''' },
+Flight ID: 1, Departure Time: 05:29, Available Seats: 0
+Flight ID: 2, Departure Time: 18:12, Available Seats: 90
+Flight ID: 3, Departure Time: 00:17, Available Seats: 0''' },
                 { "role": "user", "content": "i'll do the first"},
                 { "role": "system", "content": '''```python
-booking = book_flight(474)
+booking = book_flight(1)
 if booking:
     print(f"Booking for flight {booking} succesful")
 else:
@@ -108,7 +110,11 @@ else:
     client = OpenAI(base_url=base_url, api_key=api_key)
 
     while True: 
-        user_input = input("User (blank to quit):")
+        try:
+            user_input = input("User (blank to quit):")
+        except EOFError:
+            print(booked_flights)
+            break
 
         if user_input == "":
             print(booked_flights)
@@ -120,19 +126,20 @@ else:
         # chatbot logic here
         resp = client.chat.completions.create(
             messages = messages,
-            model = "llama3p1-8b-instruct",
+            #model = "llama3p1-8b-instruct",
+            model = model,
             temperature=0)
         extracted_code = re.search(r'```python(.*?)```', resp.choices[0].message.content, re.DOTALL)
         if extracted_code:
             extracted_code = extracted_code.group(1)
             try:
-                #print(extracted_code)
+                print(extracted_code)
                 stdout = io.StringIO()
                 with redirect_stdout(stdout):
                     exec(extracted_code)
                 print(stdout.getvalue())
                 # Append the system's answer and code to the log
-                messages.append({ "role": "system", "content":  resp.choices[0].message.content + stdout.getvalue()})
+                messages.append({ "role": "system", "content":  stdout.getvalue()})
                 #print(messages)
             except Exception as e:
                 print(e)
@@ -140,6 +147,15 @@ else:
             messages.append({ "role": "system", "content": resp.choices[0].message.content})
             print(resp.choices[0].message.content)
             
-        
-run_chat(api_key = "ravuri.n@northeastern.edu:81592")
+
+def main():
+    parser = argparse.ArgumentParser(description="Thomas the Travel Agent")
+    parser.add_argument('model', help="The model name to use for the chatbot")
+    args = parser.parse_args()
+    run_chat(api_key = "ravuri.n@northeastern.edu:81592", model=args.model)
+
+if __name__ == "__main__":
+    main()
+    
+#run_chat(api_key = "ravuri.n@northeastern.edu:81592")
 #What flights are there from Boston to San Francisco on January 6, 2023?
