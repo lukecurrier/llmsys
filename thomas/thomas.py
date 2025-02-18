@@ -5,30 +5,29 @@ import re
 from typing import List, Optional
 from contextlib import redirect_stdout
 import io
-import sys
 import argparse
 
-OG_FLIGHT = load_dataset("nuprl/engineering-llm-systems", name="flights", split="train")
+FLIGHT_DATASET = load_dataset("nuprl/engineering-llm-systems", name="flights", split="train")
 booked_flights = []
 
 class Flight:
     def __init__(self, flight_id: int):
-        self.id = OG_FLIGHT[flight_id]['id']
-        self.date = OG_FLIGHT[flight_id]['date']
-        self.airline = OG_FLIGHT[flight_id]['airline']
-        self.flight_number = OG_FLIGHT[flight_id]['flight_number']
-        self.origin = OG_FLIGHT[flight_id]['origin']
-        self.destination = OG_FLIGHT[flight_id]['destination']
-        self.departure_time = OG_FLIGHT[flight_id]['departure_time']
-        self.arrival_time = OG_FLIGHT[flight_id]['arrival_time']
-        self.available_seats = OG_FLIGHT[flight_id]['available_seats']
+        self.id = FLIGHT_DATASET[flight_id]['id']
+        self.date = FLIGHT_DATASET[flight_id]['date']
+        self.airline = FLIGHT_DATASET[flight_id]['airline']
+        self.flight_number = FLIGHT_DATASET[flight_id]['flight_number']
+        self.origin = FLIGHT_DATASET[flight_id]['origin']
+        self.destination = FLIGHT_DATASET[flight_id]['destination']
+        self.departure_time = FLIGHT_DATASET[flight_id]['departure_time']
+        self.arrival_time = FLIGHT_DATASET[flight_id]['arrival_time']
+        self.available_seats = FLIGHT_DATASET[flight_id]['available_seats']
     
 def find_flights(origin: str, destination: str, date: datetime.date) -> List[Flight]:
     formatted_date = date.strftime("%Y-%m-%d")
-    return [Flight(flight["id"]) for flight in OG_FLIGHT if flight["origin"] == origin and flight["destination"] == destination and flight["date"] == formatted_date]
+    return [Flight(flight["id"]) for flight in FLIGHT_DATASET if flight["origin"] == origin and flight["destination"] == destination and flight["date"] == formatted_date]
 
 def book_flight(flight_id: int) -> Optional[int]:
-    if OG_FLIGHT[flight_id]["available_seats"] > 0:
+    if FLIGHT_DATASET[flight_id]["available_seats"] > 0:
         if flight_id in booked_flights:
             return None
         else:
@@ -129,7 +128,6 @@ else:
         # chatbot logic here
         resp = client.chat.completions.create(
             messages = messages,
-            #model = "llama3p1-8b-instruct",
             model = model,
             temperature=0)
         extracted_code = re.search(r'```python(.*?)```', resp.choices[0].message.content, re.DOTALL)
@@ -143,7 +141,6 @@ else:
                 print(stdout.getvalue())
                 # Append the system's answer and code to the log
                 messages.append({ "role": "system", "content":  stdout.getvalue()})
-                #print(messages)
             except Exception as e:
                 print(e)
         else:
@@ -153,12 +150,10 @@ else:
 
 def main():
     parser = argparse.ArgumentParser(description="Thomas the Travel Agent")
-    parser.add_argument('model', help="The model name to use for the chatbot")
+    parser.add_argument('model', help="The model to use")
     args = parser.parse_args()
     run_chat(api_key = "ravuri.n@northeastern.edu:81592", model=args.model)
 
 if __name__ == "__main__":
     main()
     
-#run_chat(api_key = "ravuri.n@northeastern.edu:81592")
-#What flights are there from Boston to San Francisco on January 6, 2023?
