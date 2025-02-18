@@ -1,6 +1,7 @@
 - user_messages:
-    - What are the flights from BOS to SFO on January 6?
-    - Thanks, that's all.
+    - "What are the flights from BOS to SFO on January 6?"
+    - "Thanks, that's all."
+    - ""
   expected_result: []
 - user_messages:
     - What flights are there from the MA capital to the bay area on the last day of january?
@@ -11,14 +12,14 @@
     - Book the first one.
   expected_result: []
 - user_messages:
-    - What are the flights from BOS to SFO on January 6?
+   - What are the flights from BOS to SFO on January 6?
     - Book the earliest one.
   expected_result: [14322]
 - user_messages:
     - What are the flights from BOS to SFO on February 11?
     - Book the two earliest ones.
   expected_result: [3584, 3585]
-  - user_messages:
+- user_messages:
     - What are the flights from BOS to SFO on February 5?
     - Book flights 3069 and 3067 please!
     - Now book flight 3068.

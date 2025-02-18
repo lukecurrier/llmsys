@@ -1,7 +1,7 @@
 - user_messages:
     - What are the flights from Boston to Dallas on January 1?
     - Book the first one, thanks.
-  # Booking won't work -- the flight is full.
+   # Booking won't work -- the flight is full.
   expected_result: []
 - user_messages:
     - What are the flights from Boston to Dallas on January 1?

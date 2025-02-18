@@ -1,0 +1,45 @@
+
+Test 1
+Success: True
+Messages: ['What are the flights from BOS to SFO on January 6?', "Thanks, that's all.", '']
+Expected: []
+Got: []
+Stdout: User (blank to quit):Available Flights:
+Flight ID: 474, Departure Time: 05:29, Available Seats: 0
+Flight ID: 475, Departure Time: 18:12, Available Seats: 90
+Flight ID: 476, Departure Time: 00:17, Available Seats: 0
+
+User (blank to quit):It was a pleasure assisting you with your flight queries. Have a great day!
+User (blank to quit):
+Stderr: Traceback (most recent call last):
+  File "/Users/lsc/repos/llmsys/thomas/thomas.py", line 144, in <module>
+    run_chat(api_key = "ravuri.n@northeastern.edu:81592")
+  File "/Users/lsc/repos/llmsys/thomas/thomas.py", line 111, in run_chat
+    user_input = input("User (blank to quit):")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+EOFError: EOF when reading a line
+
+--------------------------------------------------------------------------------
+
+Test 2
+Success: False
+Messages: ['What flights are there from the MA capital to the bay area on the last day of january?', 'Book the second one.']
+Expected: [2631]
+Got: []
+Stdout: User (blank to quit):Available Flights:
+Flight ID: 2630, Departure Time: 05:29, Available Seats: 118
+Flight ID: 2631, Departure Time: 00:17, Available Seats: 66
+Flight ID: 2632, Departure Time: 19:46, Available Seats: 0
+
+User (blank to quit):Booking for flight 2631 successful
+
+User (blank to quit):
+Stderr: Traceback (most recent call last):
+  File "/Users/lsc/repos/llmsys/thomas/thomas.py", line 144, in <module>
+    run_chat(api_key = "ravuri.n@northeastern.edu:81592")
+  File "/Users/lsc/repos/llmsys/thomas/thomas.py", line 111, in run_chat
+    user_input = input("User (blank to quit):")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+EOFError: EOF when reading a line
+
+--------------------------------------------------------------------------------
