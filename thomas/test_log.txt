@@ -1,45 +1,390 @@
 
+Test 4
+Success: True
+Messages: ['Are there any flights from JFK to denver on october 9?', 'Book it.', 'Book the available flight.']
+Expected: [24389]
+Got: [24389]
+Stdout: User (blank to quit):
+flights = find_flights('JFK', 'DEN', datetime.date(2023, 10, 9))
+if flights:
+   print("Available Flights:")
+   for flight in flights:
+        print(f"Flight ID: {flight.id}, Departure Time: {flight.departure_time}, Available Seats: {flight.available_seats}")
+else:
+   print("No flights available.")
+
+Available Flights:
+Flight ID: 24389, Departure Time: 14:37, Available Seats: 59
+
+User (blank to quit):
+booking = book_flight(24389)
+if booking:
+    print(f"Booking for flight {booking} successful")
+else:
+   print(f"Flight could not be booked. Please choose a different flight.")
+
+Booking for flight 24389 successful
+
+User (blank to quit):
+booking = book_flight(24389)
+if booking:
+    print(f"Booking for flight {booking} successful")
+else:
+   print(f"Flight could not be booked. Please choose a different flight.")
+
+Flight could not be booked. Please choose a different flight.
+
+User (blank to quit):[24389]
+
+--------------------------------------------------------------------------------
+
+Test 7
+Success: True
+Messages: ['Are there any flights from JFK to denver on october 9?', 'Book it.', 'Book the available flight.']
+Expected: [24389]
+Got: [24389]
+Stdout: User (blank to quit):
+flights = find_flights('JFK', 'DEN', datetime.date(2023, 10, 9))
+if flights:
+   print("Available Flights:")
+   for flight in flights:
+        print(f"Flight ID: {flight.id}, Departure Time: {flight.departure_time}, Available Seats: {flight.available_seats}")
+else:
+   print("No flights available.")
+
+Available Flights:
+Flight ID: 24389, Departure Time: 14:37, Available Seats: 59
+
+User (blank to quit):
+booking = book_flight(24389)
+if booking:
+    print(f"Booking for flight {booking} successful")
+else:
+   print(f"Flight could not be booked. Please choose a different flight.")
+
+Booking for flight 24389 successful
+
+User (blank to quit):
+booking = book_flight(24389)
+if booking:
+    print(f"Booking for flight {booking} successful")
+else:
+   print(f"Flight could not be booked. Please choose a different flight.")
+
+Flight could not be booked. Please choose a different flight.
+
+User (blank to quit):[24389]
+
+--------------------------------------------------------------------------------
+
+Test 6
+Success: True
+Messages: ['Are there any flights from JFK to denver on october 9?', 'Book it.', 'Book the available flight.']
+Expected: [24389]
+Got: [24389]
+Stdout: User (blank to quit):
+flights = find_flights('JFK', 'DEN', datetime.date(2023, 10, 9))
+if flights:
+   print("Available Flights:")
+   for flight in flights:
+        print(f"Flight ID: {flight.id}, Departure Time: {flight.departure_time}, Available Seats: {flight.available_seats}")
+else:
+   print("No flights available.")
+
+Available Flights:
+Flight ID: 24389, Departure Time: 14:37, Available Seats: 59
+
+User (blank to quit):
+booking = book_flight(24389)
+if booking:
+    print(f"Booking for flight {booking} successful")
+else:
+   print(f"Flight could not be booked. Please choose a different flight.")
+
+Booking for flight 24389 successful
+
+User (blank to quit):
+booking = book_flight(24389)
+if booking:
+    print(f"Booking for flight {booking} successful")
+else:
+   print(f"Flight could not be booked. Please choose a different flight.")
+
+Flight could not be booked. Please choose a different flight.
+
+User (blank to quit):[24389]
+
+--------------------------------------------------------------------------------
+
+Test 10
+Success: True
+Messages: ['Are there any flights from JFK to denver on october 9?', 'Book it.', 'Book the available flight.']
+Expected: [24389]
+Got: [24389]
+Stdout: User (blank to quit):
+flights = find_flights('JFK', 'DEN', datetime.date(2023, 10, 9))
+if flights:
+   print("Available Flights:")
+   for flight in flights:
+        print(f"Flight ID: {flight.id}, Departure Time: {flight.departure_time}, Available Seats: {flight.available_seats}")
+else:
+   print("No flights available.")
+
+Available Flights:
+Flight ID: 24389, Departure Time: 14:37, Available Seats: 59
+
+User (blank to quit):
+booking = book_flight(24389)
+if booking:
+    print(f"Booking for flight {booking} successful")
+else:
+   print(f"Flight could not be booked. Please choose a different flight.")
+
+Booking for flight 24389 successful
+
+User (blank to quit):
+booking = book_flight(24389)
+if booking:
+    print(f"Booking for flight {booking} successful")
+else:
+   print(f"Flight could not be booked. Please choose a different flight.")
+
+Flight could not be booked. Please choose a different flight.
+
+User (blank to quit):[24389]
+
+--------------------------------------------------------------------------------
+
+Test 8
+Success: True
+Messages: ['Are there any flights from JFK to denver on october 9?', 'Book it.', 'Book the available flight.']
+Expected: [24389]
+Got: [24389]
+Stdout: User (blank to quit):
+flights = find_flights('JFK', 'DEN', datetime.date(2023, 10, 9))
+if flights:
+   print("Available Flights:")
+   for flight in flights:
+        print(f"Flight ID: {flight.id}, Departure Time: {flight.departure_time}, Available Seats: {flight.available_seats}")
+else:
+   print("No flights available.")
+
+Available Flights:
+Flight ID: 24389, Departure Time: 14:37, Available Seats: 59
+
+User (blank to quit):
+booking = book_flight(24389)
+if booking:
+    print(f"Booking for flight {booking} successful")
+else:
+   print(f"Flight could not be booked. Please choose a different flight.")
+
+Booking for flight 24389 successful
+
+User (blank to quit):
+booking = book_flight(24389)
+if booking:
+    print(f"Booking for flight {booking} successful")
+else:
+   print(f"Flight could not be booked. Please choose a different flight.")
+
+Flight could not be booked. Please choose a different flight.
+
+User (blank to quit):[24389]
+
+--------------------------------------------------------------------------------
+
+Test 9
+Success: True
+Messages: ['Are there any flights from JFK to denver on october 9?', 'Book it.', 'Book the available flight.']
+Expected: [24389]
+Got: [24389]
+Stdout: User (blank to quit):
+flights = find_flights('JFK', 'DEN', datetime.date(2023, 10, 9))
+if flights:
+   print("Available Flights:")
+   for flight in flights:
+        print(f"Flight ID: {flight.id}, Departure Time: {flight.departure_time}, Available Seats: {flight.available_seats}")
+else:
+   print("No flights available.")
+
+Available Flights:
+Flight ID: 24389, Departure Time: 14:37, Available Seats: 59
+
+User (blank to quit):
+booking = book_flight(24389)
+if booking:
+    print(f"Booking for flight {booking} successful")
+else:
+   print(f"Flight could not be booked. Please choose a different flight.")
+
+Booking for flight 24389 successful
+
+User (blank to quit):
+booking = book_flight(24389)
+if booking:
+    print(f"Booking for flight {booking} successful")
+else:
+   print(f"Flight could not be booked. Please choose a different flight.")
+
+Flight could not be booked. Please choose a different flight.
+
+User (blank to quit):[24389]
+
+--------------------------------------------------------------------------------
+
 Test 1
 Success: True
-Messages: ['What are the flights from BOS to SFO on January 6?', "Thanks, that's all.", '']
-Expected: []
-Got: []
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 474, Departure Time: 05:29, Available Seats: 0
-Flight ID: 475, Departure Time: 18:12, Available Seats: 90
-Flight ID: 476, Departure Time: 00:17, Available Seats: 0
+Messages: ['Are there any flights from JFK to denver on october 9?', 'Book it.', 'Book the available flight.']
+Expected: [24389]
+Got: [24389]
+Stdout: User (blank to quit):
+flights = find_flights('JFK', 'DEN', datetime.date(2023, 10, 9))
+if flights:
+   print("Available Flights:")
+   for flight in flights:
+        print(f"Flight ID: {flight.id}, Departure Time: {flight.departure_time}, Available Seats: {flight.available_seats}")
+else:
+   print("No flights available.")
 
-User (blank to quit):It was a pleasure assisting you with your flight queries. Have a great day!
+Available Flights:
+Flight ID: 24389, Departure Time: 14:37, Available Seats: 59
+
 User (blank to quit):
-Stderr: Traceback (most recent call last):
-  File "/Users/lsc/repos/llmsys/thomas/thomas.py", line 144, in <module>
-    run_chat(api_key = "ravuri.n@northeastern.edu:81592")
-  File "/Users/lsc/repos/llmsys/thomas/thomas.py", line 111, in run_chat
-    user_input = input("User (blank to quit):")
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-EOFError: EOF when reading a line
+booking = book_flight(24389)
+if booking:
+    print(f"Booking for flight {booking} successful")
+else:
+   print(f"Flight could not be booked. Please choose a different flight.")
+
+Booking for flight 24389 successful
+
+User (blank to quit):
+booking = book_flight(24389)
+if booking:
+    print(f"Booking for flight {booking} successful")
+else:
+   print(f"Flight could not be booked. Please choose a different flight.")
+
+Flight could not be booked. Please choose a different flight.
+
+User (blank to quit):[24389]
 
 --------------------------------------------------------------------------------
 
 Test 2
-Success: False
-Messages: ['What flights are there from the MA capital to the bay area on the last day of january?', 'Book the second one.']
-Expected: [2631]
-Got: []
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 2630, Departure Time: 05:29, Available Seats: 118
-Flight ID: 2631, Departure Time: 00:17, Available Seats: 66
-Flight ID: 2632, Departure Time: 19:46, Available Seats: 0
+Success: True
+Messages: ['Are there any flights from JFK to denver on october 9?', 'Book it.', 'Book the available flight.']
+Expected: [24389]
+Got: [24389]
+Stdout: User (blank to quit):
+flights = find_flights('JFK', 'DEN', datetime.date(2023, 10, 9))
+if flights:
+   print("Available Flights:")
+   for flight in flights:
+        print(f"Flight ID: {flight.id}, Departure Time: {flight.departure_time}, Available Seats: {flight.available_seats}")
+else:
+   print("No flights available.")
 
-User (blank to quit):Booking for flight 2631 successful
+Available Flights:
+Flight ID: 24389, Departure Time: 14:37, Available Seats: 59
 
 User (blank to quit):
-Stderr: Traceback (most recent call last):
-  File "/Users/lsc/repos/llmsys/thomas/thomas.py", line 144, in <module>
-    run_chat(api_key = "ravuri.n@northeastern.edu:81592")
-  File "/Users/lsc/repos/llmsys/thomas/thomas.py", line 111, in run_chat
-    user_input = input("User (blank to quit):")
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-EOFError: EOF when reading a line
+booking = book_flight(24389)
+if booking:
+    print(f"Booking for flight {booking} successful")
+else:
+   print(f"Flight could not be booked. Please choose a different flight.")
+
+Booking for flight 24389 successful
+
+User (blank to quit):
+booking = book_flight(24389)
+if booking:
+    print(f"Booking for flight {booking} successful")
+else:
+   print(f"Flight could not be booked. Please choose a different flight.")
+
+Flight could not be booked. Please choose a different flight.
+
+User (blank to quit):[24389]
+
+--------------------------------------------------------------------------------
+
+Test 3
+Success: True
+Messages: ['Are there any flights from JFK to denver on october 9?', 'Book it.', 'Book the available flight.']
+Expected: [24389]
+Got: [24389]
+Stdout: User (blank to quit):
+flights = find_flights('JFK', 'DEN', datetime.date(2023, 10, 9))
+if flights:
+   print("Available Flights:")
+   for flight in flights:
+        print(f"Flight ID: {flight.id}, Departure Time: {flight.departure_time}, Available Seats: {flight.available_seats}")
+else:
+   print("No flights available.")
+
+Available Flights:
+Flight ID: 24389, Departure Time: 14:37, Available Seats: 59
+
+User (blank to quit):
+booking = book_flight(24389)
+if booking:
+    print(f"Booking for flight {booking} successful")
+else:
+   print(f"Flight could not be booked. Please choose a different flight.")
+
+Booking for flight 24389 successful
+
+User (blank to quit):
+booking = book_flight(24389)
+if booking:
+    print(f"Booking for flight {booking} successful")
+else:
+   print(f"Flight could not be booked. Please choose a different flight.")
+
+Flight could not be booked. Please choose a different flight.
+
+User (blank to quit):[24389]
+
+--------------------------------------------------------------------------------
+
+Test 5
+Success: True
+Messages: ['Are there any flights from JFK to denver on october 9?', 'Book it.', 'Book the available flight.']
+Expected: [24389]
+Got: [24389]
+Stdout: User (blank to quit):
+flights = find_flights('JFK', 'DEN', datetime.date(2023, 10, 9))
+if flights:
+   print("Available Flights:")
+   for flight in flights:
+        print(f"Flight ID: {flight.id}, Departure Time: {flight.departure_time}, Available Seats: {flight.available_seats}")
+else:
+   print("No flights available.")
+
+Available Flights:
+Flight ID: 24389, Departure Time: 14:37, Available Seats: 59
+
+User (blank to quit):
+booking = book_flight(24389)
+if booking:
+    print(f"Booking for flight {booking} successful")
+else:
+   print(f"Flight could not be booked. Please choose a different flight.")
+
+Booking for flight 24389 successful
+
+User (blank to quit):
+booking = book_flight(24389)
+if booking:
+    print(f"Booking for flight {booking} successful")
+else:
+   print(f"Flight could not be booked. Please choose a different flight.")
+
+Flight could not be booked. Please choose a different flight.
+
+User (blank to quit):[24389]
 
 --------------------------------------------------------------------------------

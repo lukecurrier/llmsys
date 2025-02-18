@@ -29,8 +29,11 @@ def find_flights(origin: str, destination: str, date: datetime.date) -> List[Fli
 
 def book_flight(flight_id: int) -> Optional[int]:
     if OG_FLIGHT[flight_id]["available_seats"] > 0:
-        booked_flights.append(flight_id)
-        return flight_id
+        if flight_id in booked_flights:
+            return None
+        else:
+            booked_flights.append(flight_id)
+            return flight_id
     else: 
         return None
 
@@ -40,12 +43,12 @@ def run_chat(api_key: str, model: str):
     
     SYSTEM_PROMPT  = """
     You are an AI travel agent named Thomas conversing with a user. If the user requests information about flights, your task is to find and book their flights. You MUST generate code to find and book flights, if requested.
-    Do not display available flights without generating code to do so.
+    Do not display available flights without generating code to do so. 
     We have defined a function called
 
     def find_flights(origin: str, destination: str, departure_date: datetime.date) -> list[Flight]:
 
-    It takes the origin and destination airport codes. And produces a list of Flight objects
+    It takes the origin and destination airport codes and produces a list of Flight objects. Remember, the year is 2023.
     containing flight information. Each Flight object has the following fields: id, date, airline, flight_number, origin
     destination, departure_time, arrival_time, and available_seats. 
     
@@ -104,7 +107,7 @@ booking = book_flight(1)
 if booking:
     print(f"Booking for flight {booking} succesful")
 else:
-   print(f"Flight is unfortunately at full capacity. Please choose a different flight.")''' },
+   print(f"Flight could not be booked. Please choose a different flight.")''' },
                 ]        
 
     client = OpenAI(base_url=base_url, api_key=api_key)
