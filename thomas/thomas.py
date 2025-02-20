@@ -7,6 +7,7 @@ from contextlib import redirect_stdout
 import io
 import argparse
 
+# Load the dataset
 FLIGHT_DATASET = load_dataset("nuprl/engineering-llm-systems", name="flights", split="train")
 booked_flights = []
 
@@ -42,15 +43,14 @@ def run_chat(api_key: str, model: str):
     
     SYSTEM_PROMPT  = """
     You are an AI travel agent named Thomas conversing with a user. If the user requests information about flights, your task is to find and book their flights. You MUST generate code to find and book flights, if requested.
-    Do not display available flights without generating code to do so. 
+
     We have defined a function called
 
     def find_flights(origin: str, destination: str, departure_date: datetime.date) -> list[Flight]:
 
     It takes the origin and destination airport codes and produces a list of Flight objects. Remember, the year is 2023.
     containing flight information. Each Flight object has the following fields: id, date, airline, flight_number, origin
-    destination, departure_time, arrival_time, and available_seats. 
-    
+    destination, departure_time, arrival_time, and available_seats.
     We have also defined a function called
 
     book_flight(flight_id: int) -> Optional[int]
@@ -74,8 +74,8 @@ if flights:
         print(f"Flight ID: {flight.id}, Departure Time: {flight.departure_time}, Available Seats: {flight.available_seats}")
 else:
      print("No flights available.")
-```
-Available Flights:
+```''' },
+                { "role": "system", "content": '''Available Flights:
 Flight ID: 474, Departure Time: 05:29, Available Seats: 0
 Flight ID: 475, Departure Time: 18:12, Available Seats: 90
 Flight ID: 476, Departure Time: 00:17, Available Seats: 0''' },
@@ -85,7 +85,9 @@ booking = book_flight(475)
 if booking:
     print(f"Booking for flight {booking} succesful")
 else:
-   print(f"Flight is unfortunately at full capacity. Please choose a different flight.")''' },
+   print(f"Flight is unfortunately at full capacity. Please choose a different flight.")
+   ```''' },
+                { "role": "system", "content": "Booking for flight 475 succesful" },
                 { "role": "user", "content": "What are the flights from Boston to EWR on jan 1?"},
                 { "role": "system", "content": '''```python
 flights = find_flights('BOS', 'EWR', datetime.date(2023, 1, 1))
@@ -95,8 +97,8 @@ if flights:
         print(f"Flight ID: {flight.id}, Departure Time: {flight.departure_time}, Available Seats: {flight.available_seats}")
     else:
         print("No flights available.")
-```
-Available Flights:
+```''' },
+                { "role": "system", "content": '''Available Flights:
 Flight ID: 1, Departure Time: 05:29, Available Seats: 0
 Flight ID: 2, Departure Time: 18:12, Available Seats: 90
 Flight ID: 3, Departure Time: 00:17, Available Seats: 0''' },
@@ -106,18 +108,22 @@ booking = book_flight(1)
 if booking:
     print(f"Booking for flight {booking} succesful")
 else:
-   print(f"Flight could not be booked. Please choose a different flight.")''' },
+   print(f"Flight could not be booked. Please choose a different flight.")```''' },
+                { "role": "system", "content": "Flight could not be booked. Please choose a different flight." },
+                { "role": "user", "content": "i'll do the first"},
                 ]        
 
     client = OpenAI(base_url=base_url, api_key=api_key)
 
     while True: 
+        # Catch any end of file errors
         try:
             user_input = input("User (blank to quit):")
         except EOFError:
             print(booked_flights)
             break
 
+        # On empty input, return the flights booked
         if user_input == "":
             print(booked_flights)
             break
@@ -125,24 +131,27 @@ else:
         #Append the message the user asked to the log
         messages.append({ "role": "user", "content": user_input})
         
-        # chatbot logic here
+        # Generate the system response
         resp = client.chat.completions.create(
             messages = messages,
             model = model,
             temperature=0)
-        extracted_code = re.search(r'```python(.*?)```', resp.choices[0].message.content, re.DOTALL)
+        # Extract the python code
+        extracted_code = re.search(r'```python(.*?)```(.*?)', resp.choices[0].message.content, re.DOTALL)
         if extracted_code:
             extracted_code = extracted_code.group(1)
             try:
-                print(extracted_code)
                 stdout = io.StringIO()
+                # Execute the extracted code & print the stdoutput
                 with redirect_stdout(stdout):
                     exec(extracted_code)
                 print(stdout.getvalue())
                 # Append the system's answer and code to the log
+                messages.append({ "role": "system", "content":  resp.choices[0].message.content})
                 messages.append({ "role": "system", "content":  stdout.getvalue()})
             except Exception as e:
-                print(e)
+                print(f"Error: {e}")
+                break
         else:
             messages.append({ "role": "system", "content": resp.choices[0].message.content})
             print(resp.choices[0].message.content)
