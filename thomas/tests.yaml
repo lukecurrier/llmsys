@@ -1,9 +1,114 @@
+# Simple flight booking but flight is full
 - user_messages:
     - What are the flights from Boston to Dallas on January 1?
     - Book the first one, thanks.
-   # Booking won't work -- the flight is full.
+  # Booking won't work -- the flight is full.
   expected_result: []
+
+# Simple flight booking that is succesful
 - user_messages:
     - What are the flights from Boston to Dallas on January 1?
     - Book the second one, thanks.
   expected_result: [2]
+
+# Simple unsuccesful flight booking using airport codes instead of city names
+- user_messages:
+    - "What are the flights from BOS to SFO on January 6?"
+    - "Thanks, that's all."
+    - ""
+  expected_result: []
+
+# Simple succesful flight booking using city name aliases
+- user_messages:
+    - What flights are there from the MA capital to the bay area on the last day of january?
+    - Book the second one.
+  expected_result: [2631]
+
+# Unsuccesful flight unrelated travel question
+- user_messages:
+    - Can you book me a train trip from boston to nyc on january 10th?
+    - Book the first one.
+  expected_result: []
+
+# Succesful flight booking with vague destination/origin
+- user_messages:
+    - What is the earliest flight from boston on january 1
+    - Book it
+  expected_result: [2]
+
+# Succesful booking that requires agent to analyze extra information
+- user_messages:
+   - what flights are there from boston to san francisco on december 29?
+   - Book the one that's in the evening.
+  expected_result: [31381]
+
+  # Succesful booking that requires agent to analyze extra information
+- user_messages:
+   - what flights are there from boston to san francisco on december 29?
+   - Book the earliest one in the day
+  expected_result: [31382]
+
+# Succesful multi flight booking that requires agent to analyze extra information
+- user_messages:
+    - What are the flights from BOS to SFO on February 11?
+    - Book the two earliest ones.
+  expected_result: [3584, 3585]
+
+# Succesful multi flight booking followed by an unsuccesful booking
+- user_messages:
+    - What are the flights from BOS to SFO on February 5?
+    - Book flights 3069 and 3067 please!
+    - Now book flight 3068.
+  expected_result: [3069, 3067]
+
+# Succesful flight booking with short messages
+- user_messages: 
+    - Are there any flights from JFK to denver on october 9?
+    - Book it.
+  expected_result: [24389]
+
+# Succesful flight booking with typos
+- user_messages:
+    - What are hte flights form BOS to SFO on February 5st?
+    - Can i book the first one?
+  expected_result: [3067]
+
+# Succesful multi flight booking with typos
+- user_messages:
+    - What are hte flights form BOS to SFO on February 5st?
+    - Book all the flights with available seats
+  expected_result: [3067, 3069, 3070]
+
+# Succesful flight booking that requires the agent to answer additional questions
+- user_messages:
+    - What are the flights from Boston to Dallas on January 1?
+    - Which one is the earliest?
+    - Can I book this one?
+    - Book the earliest one that has seats available
+  expected_result: [2]
+
+# Succesful round trip multi flight booking 
+- user_messages:
+    - What are the flights from Boston to Dallas on January 1?
+    - I'll book the second one
+    - Are there flights from Dallas to Boston on January 2?
+    - I will book flight 163 as well
+  expected_result: [2, 163]
+
+# Flight booking where there are no flights available
+- user_messages:
+    - What flights are available from boston to miami on feburary 28?
+    - I'll book the second one
+  expected_result: []
+
+# Flight booking where there are no flights available
+- user_messages:
+    - What flights are available from boston to miami on feburary 28?
+    - I'll book the second one
+  expected_result: []
+
+  # Flight booking when user uses invalid date
+- user_messages:
+    - What flights are available from boston to miami on feburary 31st?
+    - I'll book the second one
+  expected_result: []
