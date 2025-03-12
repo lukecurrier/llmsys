@@ -1,0 +1,8 @@
+marker-pdf
+opendatasets
+pandas 
+kagglehub
+transformers 
+huggingface_hub 
+accelerate 
+torch
