@@ -1,15 +1,21 @@
 import math
 from functools import lru_cache
+import os
 from datasets import load_dataset
 import numpy as np
 import torch
 from transformers import AutoTokenizer, AutoModel
-#from openai import OpenAI
+from openai import OpenAI
 import heapq
 from typing import List
 
 model = AutoModel.from_pretrained("answerdotai/ModernBERT-base")
 tokenizer = AutoTokenizer.from_pretrained("answerdotai/ModernBERT-base")
+
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+base_url = "https://nerc.guha-anderson.com/v1"
+api_key = "ravuri.n@northeastern.edu:81592"
+client = OpenAI(base_url=base_url, api_key=api_key)
 
 neu_wiki = load_dataset("nuprl/engineering-llm-systems", name="wikipedia-northeastern-university", split="test")
 obscure_questions = load_dataset("nuprl/engineering-llm-systems", name="obscure_questions", split="test")
@@ -44,32 +50,39 @@ def rank_by_tf_idf(query: str):
     query_vec = compute_tf_idf_vector(query.split(), query)
     return sorted(neu_wiki, key=lambda x: compute_cosine_similarity(query_vec, compute_tf_idf_vector(query.split(), x["text"])), reverse=True)
 
-def find_top_n_documents(n):
+def find_top_n_documents(n, prompt):
     with torch.no_grad():
-        for question in obscure_questions:
-            query_docs = rank_by_tf_idf(question['prompt'])
-            top_docs = []  # Min-heap to store top n documents
-            query_vec = model(**tokenizer(question['prompt'], return_tensors="pt")).last_hidden_state[0, 0]
+        query_docs = rank_by_tf_idf(prompt)
+        #print("\n" + prompt + "\n-")
+        #for doc in query_docs[:2]: 
+        #   print(doc['title'])
+        #print("\n")
+        top_docs = []  # Min-heap to store top n documents
+        query_vec = model(**tokenizer(prompt, return_tensors="pt")).last_hidden_state[0, 0]
+        
+        for doc in query_docs[:2]:
+            #print("Examining " + doc['title'])
+            doc_vec = model(**tokenizer(doc["text"], return_tensors="pt", truncation=True)).last_hidden_state[0, 0]
+            cosine_sim = compute_cosine_similarity(query_vec.numpy(), doc_vec.numpy())
+            #print(f"Similarity: {cosine_sim:.4f}\n")
             
-            for doc in query_docs[:2]:
-                doc_vec = model(**tokenizer(doc["text"], return_tensors="pt", truncation=True)).last_hidden_state[0, 0]
-                cosine_sim = compute_cosine_similarity(query_vec.numpy(), doc_vec.numpy())
-                
-                # Maintain a min-heap of top n documents
-                if len(top_docs) < n:
-                    heapq.heappush(top_docs, (cosine_sim, doc))
-                else:
-                    heapq.heappushpop(top_docs, (cosine_sim, doc))
+            # Maintain a min-heap of top n documents
+            if len(top_docs) < n:
+                heapq.heappush(top_docs, (cosine_sim, doc))
+            else:
+                heapq.heappushpop(top_docs, (cosine_sim, doc))
+        #print("\n")
 
-            # Sort in descending order based on similarity
-            sorted_top_docs = sorted(top_docs, key=lambda x: x[0], reverse=True)
+        # Sort in descending order based on similarity
+        sorted_top_docs = sorted(top_docs, key=lambda x: x[0], reverse=True)
 
-            print(f"Top documents for question: {question['prompt']}")
-            for sim, doc in sorted_top_docs:
-                print(f"Similarity: {sim:.4f}")
-                print(doc['title'])
-                print(doc['url'])
-            print("\n" + "-" * 50 + "\n")
+        #print(f"Top documents for question: {prompt}")
+        #for sim, doc in sorted_top_docs:
+        #    print(f"Similarity: {sim:.4f}")
+        #    print(doc['title'])
+        #    print(doc['url'])
+        #print("\n" + "-" * 50 + "\n")
+        return [doc for _, doc in sorted_top_docs]
 
 
 def answer_query(question: str, choices: List[str], documents: List[str]) -> str:
@@ -90,7 +103,34 @@ def answer_query(question: str, choices: List[str], documents: List[str]) -> str
      `"A"` but not `"A."` and not `"A. Choice 1"`.
      """
 
+    SYSTEM_PROMPT = f"You are a question-answering assistant tasked with answering multiple-choice questions with the help of relevant documents. You will be provided with a question, a list of choices, and a list of relevant documents. Your task is to use the provided documents to find the correct answer and return it as a letter. Format your answer as simply as possible, returning ONLY the letter of the correct answer. For example, if the correct answer is 'Choice 1', return 'A' but not `A.` and not `A. Choice 1`."
+    USER_PROMPT = f"Answer the following multiple-choice question: {question}\nYou have {len(documents)} relevant documents to use to help you find the correct answer:\n{'\n'.join([f"{doc['title']} ({doc['text']})" for doc in documents])}\nThe potential answers are:\n{'\n'.join([f"{choice}" for choice in choices])}\n\nYour answer is:\n"
+    response = client.chat.completions.create(
+        messages=[
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": USER_PROMPT}
+        ],
+        model="llama3p1-8b-instruct",
+        temperature=0,
+        max_tokens=5
+    )
+    return response.choices[0].message.content[0]
 
 
+if __name__ == "__main__":
+    obscure_questions = obscure_questions.select(range(3))
+    for obsquestion in obscure_questions:
+        question = obsquestion['prompt']
+        choices = obsquestion['choices']
 
-find_top_n_documents(2)
+        print(f"Question: {question}")
+
+        documents = find_top_n_documents(2, question)
+        for doc in documents:
+            print(f"{doc['title']} ({doc['url']})")
+
+        answer = answer_query(question, choices, documents)
+        print(f"Choices: {choices}")
+        print(f"Answer: {answer}")
+        print(f"Correct Answer: {obsquestion['correct_answer']}")
+        print("----------------------------------\n")
