@@ -8,3 +8,4 @@ accelerate
 torch
 kokoro
 soundfile
+accelerate

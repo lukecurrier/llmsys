@@ -132,7 +132,7 @@ def answer_query(question: str, choices: List[str], documents: List[str]) -> str
 
 
 if __name__ == "__main__":
-    obscure_questions = obscure_questions.select(range(10))
+    obscure_questions = obscure_questions_tiny
     total_questions = 0
     correct_answers = 0
     for obsquestion in obscure_questions:
