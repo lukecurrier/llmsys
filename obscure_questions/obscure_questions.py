@@ -35,12 +35,11 @@ client = OpenAI(base_url=base_url, api_key=api_key)
 
 neu_wiki = load_dataset("nuprl/engineering-llm-systems", name="wikipedia-northeastern-university", split="test")
 obscure_questions_test = load_dataset("nuprl/engineering-llm-systems", name="obscure_questions", split="test")
-obscure_questions_tiny = load_dataset("nuprl/engineering-llm-systems", name="obscure_questions", split="test")
+obscure_questions_tiny = load_dataset("nuprl/engineering-llm-systems", name="obscure_questions", split="tiny")
 
 def preprocess_text(text: str):
     tokens = text.lower().split()  
     return [token.strip(".,!?()[]{}\"'") for token in tokens if token not in CUSTOM_STOP_WORDS]
-
 
 @lru_cache(maxsize=10000)
 def term_frequency(document: str, term: str):
