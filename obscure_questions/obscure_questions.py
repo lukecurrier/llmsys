@@ -89,5 +89,8 @@ def answer_query(question: str, choices: List[str], documents: List[str]) -> str
      The result should be the just the letter of the correct choice, e.g.,
      `"A"` but not `"A."` and not `"A. Choice 1"`.
      """
+    
+
+
 
 find_top_n_documents(2)
