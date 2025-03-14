@@ -44,36 +44,33 @@ def rank_by_tf_idf(query: str):
     query_vec = compute_tf_idf_vector(query.split(), query)
     return sorted(neu_wiki, key=lambda x: compute_cosine_similarity(query_vec, compute_tf_idf_vector(query.split(), x["text"])), reverse=True)
 
-neu_docs = rank_by_tf_idf("Northeastern")
+def find_top_n_documents(n):
+    with torch.no_grad():
+        for question in obscure_questions:
+            query_docs = rank_by_tf_idf(question['prompt'])
+            top_docs = []  # Min-heap to store top n documents
+            query_vec = model(**tokenizer(question['prompt'], return_tensors="pt")).last_hidden_state[0, 0]
+            
+            for doc in query_docs[:2]:
+                doc_vec = model(**tokenizer(doc["text"], return_tensors="pt", truncation=True)).last_hidden_state[0, 0]
+                cosine_sim = compute_cosine_similarity(query_vec.numpy(), doc_vec.numpy())
+                
+                # Maintain a min-heap of top n documents
+                if len(top_docs) < n:
+                    heapq.heappush(top_docs, (cosine_sim, doc))
+                else:
+                    heapq.heappushpop(top_docs, (cosine_sim, doc))
 
-n = 2  # Number of top documents to keep track of
-top_docs = []  # Min-heap to store top n documents
-question = obscure_questions[0]
+            # Sort in descending order based on similarity
+            sorted_top_docs = sorted(top_docs, key=lambda x: x[0], reverse=True)
 
-with torch.no_grad():
-    query_vec = model(**tokenizer(question['prompt'], return_tensors="pt")).last_hidden_state[0, 0]
-    
-    for doc in neu_docs[:2]:
-        doc_vec = model(**tokenizer(doc["text"], return_tensors="pt", truncation=True)).last_hidden_state[0, 0]
-        cosine_sim = compute_cosine_similarity(query_vec.numpy(), doc_vec.numpy())
-        
-        # Maintain a min-heap of top n documents
-        if len(top_docs) < n:
-            heapq.heappush(top_docs, (cosine_sim, doc))
-        else:
-            heapq.heappushpop(top_docs, (cosine_sim, doc))
+            print(f"Top documents for question: {question['prompt']}")
+            for sim, doc in sorted_top_docs:
+                print(f"Similarity: {sim:.4f}")
+                print(doc['title'])
+                print(doc['url'])
+            print("\n" + "-" * 50 + "\n")
 
-# Sort in descending order based on similarity
-sorted_top_docs = sorted(top_docs, key=lambda x: x[0], reverse=True)
-
-print("Top documents:")
-for sim, doc in sorted_top_docs:
-    print("---")
-    print(doc["title"])
-    print(doc["url"])
-    print(f"Similarity: {sim:.4f}")
-
-print("---")
 
 def answer_query(question: str, choices: List[str], documents: List[str]) -> str:
     """
@@ -93,3 +90,4 @@ def answer_query(question: str, choices: List[str], documents: List[str]) -> str
      `"A"` but not `"A."` and not `"A. Choice 1"`.
      """
 
+find_top_n_documents(2)
