@@ -8,13 +8,24 @@ from transformers import AutoTokenizer, AutoModel
 from openai import OpenAI
 import heapq
 from typing import List
-import spacy
-
-#python -m spacy download en_core_web_sm
 
 model = AutoModel.from_pretrained("answerdotai/ModernBERT-base")
 tokenizer = AutoTokenizer.from_pretrained("answerdotai/ModernBERT-base")
-nlp = spacy.load('en_core_web_sm')
+CUSTOM_STOP_WORDS = {
+    'a', 'an', 'the', 'and', 'or', 'but', 'if', 'while', 'with', 'of', 'at', 'by',
+    'for', 'to', 'in', 'on', 'is', 'it', 'this', 'that', 'these', 'those', 'as',
+    'are', 'was', 'were', 'be', 'been', 'has', 'have', 'had', 'do', 'does', 'did',
+    'from', 'not', 'can', 'will', 'would', 'should', 'could', 'i', 'you', 'he', 
+    'she', 'we', 'they', 'them', 'his', 'her', 'its', 'our', 'your', 'their',
+    'about', 'above', 'below', 'between', 'each', 'few', 'more', 'most', 'some', 
+    'such', 'only', 'own', 'same', 'than', 'then', 'there', 'when', 'where', 
+    'while', 'how', 'all', 'any', 'both', 'each', 'few', 'here', 'over', 'under',
+    'again', 'further', 'once', 'before', 'after', 'during', 'until', 'without',
+    'within', 'per', 'via', 'now', 'get', 'go', 'let', 'us', 'use', 'used', 'using',
+    'make', 'made', 'know', 'known', 'take', 'taken', 'see', 'seen', 'look', 'looked',
+    'come', 'came', 'say', 'said', 'tell', 'told', 'ask', 'asked', 'help', 'need',
+    'think', 'try', 'change', 'changed'
+}
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 base_url = "https://nerc.guha-anderson.com/v1"
@@ -25,8 +36,8 @@ neu_wiki = load_dataset("nuprl/engineering-llm-systems", name="wikipedia-northea
 obscure_questions = load_dataset("nuprl/engineering-llm-systems", name="obscure_questions", split="test")
 
 def preprocess_text(text: str):
-    doc = nlp(text.lower())
-    return [token.text for token in doc if not token.is_stop and not token.is_punct]
+    tokens = text.lower().split()  # Simple whitespace tokenization
+    return [token.strip(".,!?()[]{}\"'") for token in tokens if token not in CUSTOM_STOP_WORDS]
 
 @lru_cache(maxsize=10000)
 def term_frequency(document: str, term: str):
