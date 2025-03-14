@@ -34,10 +34,11 @@ api_key = "ravuri.n@northeastern.edu:81592"
 client = OpenAI(base_url=base_url, api_key=api_key)
 
 neu_wiki = load_dataset("nuprl/engineering-llm-systems", name="wikipedia-northeastern-university", split="test")
-obscure_questions = load_dataset("nuprl/engineering-llm-systems", name="obscure_questions", split="test")
+obscure_questions_test = load_dataset("nuprl/engineering-llm-systems", name="obscure_questions", split="test")
+obscure_questions_tiny = load_dataset("nuprl/engineering-llm-systems", name="obscure_questions", split="test")
 
 def preprocess_text(text: str):
-    tokens = text.lower().split()  # Simple whitespace tokenization
+    tokens = text.lower().split()  
     return [token.strip(".,!?()[]{}\"'") for token in tokens if token not in CUSTOM_STOP_WORDS]
 
 
@@ -45,7 +46,6 @@ def preprocess_text(text: str):
 def term_frequency(document: str, term: str):
     c = document.count(term)
     return 0 if c == 0 else 1 + math.log(c)
-    # return document.count(term)
 
 @lru_cache(maxsize=None)
 def inverse_document_frequency(term: str):
@@ -75,35 +75,20 @@ def rank_by_tf_idf(query: str):
 def find_top_n_documents(n, prompt):
     with torch.no_grad():
         query_docs = rank_by_tf_idf(prompt)
-        #print("\n" + prompt + "\n-")
-        #for doc in query_docs[:2]: 
-        #   print(doc['title'])
-        #print("\n")
-        top_docs = []  # Min-heap to store top n documents
+        top_docs = [] 
         query_vec = model(**tokenizer(prompt, return_tensors="pt")).last_hidden_state[0, 0]
         
         for doc in query_docs[:2]:
-            #print("Examining " + doc['title'])
             doc_vec = model(**tokenizer(doc["text"], return_tensors="pt", truncation=True)).last_hidden_state[0, 0]
             cosine_sim = compute_cosine_similarity(query_vec.numpy(), doc_vec.numpy())
-            #print(f"Similarity: {cosine_sim:.4f}\n")
             
-            # Maintain a min-heap of top n documents
             if len(top_docs) < n:
                 heapq.heappush(top_docs, (cosine_sim, doc))
             else:
                 heapq.heappushpop(top_docs, (cosine_sim, doc))
-        #print("\n")
 
-        # Sort in descending order based on similarity
         sorted_top_docs = sorted(top_docs, key=lambda x: x[0], reverse=True)
 
-        #print(f"Top documents for question: {prompt}")
-        #for sim, doc in sorted_top_docs:
-        #    print(f"Similarity: {sim:.4f}")
-        #    print(doc['title'])
-        #    print(doc['url'])
-        #print("\n" + "-" * 50 + "\n")
         return [doc for _, doc in sorted_top_docs]
 
 
