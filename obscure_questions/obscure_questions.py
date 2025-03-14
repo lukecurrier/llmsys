@@ -8,9 +8,13 @@ from transformers import AutoTokenizer, AutoModel
 from openai import OpenAI
 import heapq
 from typing import List
+import spacy
+
+#python -m spacy download en_core_web_sm
 
 model = AutoModel.from_pretrained("answerdotai/ModernBERT-base")
 tokenizer = AutoTokenizer.from_pretrained("answerdotai/ModernBERT-base")
+nlp = spacy.load('en_core_web_sm')
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 base_url = "https://nerc.guha-anderson.com/v1"
@@ -20,6 +24,11 @@ client = OpenAI(base_url=base_url, api_key=api_key)
 neu_wiki = load_dataset("nuprl/engineering-llm-systems", name="wikipedia-northeastern-university", split="test")
 obscure_questions = load_dataset("nuprl/engineering-llm-systems", name="obscure_questions", split="test")
 
+def preprocess_text(text: str):
+    doc = nlp(text.lower())
+    return [token.text for token in doc if not token.is_stop and not token.is_punct]
+
+@lru_cache(maxsize=10000)
 def term_frequency(document: str, term: str):
     c = document.count(term)
     return 0 if c == 0 else 1 + math.log(c)
@@ -28,7 +37,7 @@ def term_frequency(document: str, term: str):
 @lru_cache(maxsize=None)
 def inverse_document_frequency(term: str):
     num_docs_with_term = sum(1 for item in neu_wiki if term in item["text"])
-    return math.log(len(neu_wiki) / (1 + num_docs_with_term))
+    return math.log((1 + len(neu_wiki)) / (1 + num_docs_with_term)) + 1
 
 def compute_tf_idf_vector_unnormalized(terms, document: str):
     return [ term_frequency(document, term) * inverse_document_frequency(term) for term in terms ]
