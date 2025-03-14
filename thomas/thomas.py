@@ -161,7 +161,7 @@ def main():
     parser = argparse.ArgumentParser(description="Thomas the Travel Agent")
     parser.add_argument('model', help="The model to use")
     args = parser.parse_args()
-    run_chat(api_key = "ravuri.n@northeastern.edu:81592", model=args.model)
+    
 
 if __name__ == "__main__":
     main()
