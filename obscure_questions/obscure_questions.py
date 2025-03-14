@@ -132,7 +132,7 @@ def answer_query(question: str, choices: List[str], documents: List[str]) -> str
     USER_PROMPT = f"""Answer the following multiple-choice question: {question}\nYou have {len(documents)} 
     relevant documents to use to help you find the correct answer:\n{'\n'.join([f"{doc['title']} ({doc['text']})" for doc in documents])}
     \nThe potential answers are:\n{'\n'.join([f"{choice}" for choice in choices])}\n\nYour answer is:\n"""
-    
+
     response = client.chat.completions.create(
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
