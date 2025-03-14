@@ -8,9 +8,6 @@ from transformers import AutoTokenizer, AutoModel
 from openai import OpenAI
 import heapq
 from typing import List
-import spacy
-
-#python -m spacy download en_core_web_sm
 
 model = AutoModel.from_pretrained("answerdotai/ModernBERT-base")
 tokenizer = AutoTokenizer.from_pretrained("answerdotai/ModernBERT-base")
@@ -121,7 +118,7 @@ def answer_query(question: str, choices: List[str], documents: List[str]) -> str
     USER_PROMPT = f"""Answer the following multiple-choice question: {question}\nYou have {len(documents)} 
     relevant documents to use to help you find the correct answer:\n{'\n'.join([f"{doc['title']} ({doc['text']})" for doc in documents])}
     \nThe potential answers are:\n{'\n'.join([f"{choice}" for choice in choices])}\n\nYour answer is:\n"""
-    
+
     response = client.chat.completions.create(
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
