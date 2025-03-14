@@ -146,8 +146,11 @@ def answer_query(question: str, choices: List[str], documents: List[str]) -> str
 
 
 if __name__ == "__main__":
-    obscure_questions = obscure_questions.select(range(3))
+    obscure_questions = obscure_questions.select(range(10))
+    total_questions = 0
+    correct_answers = 0
     for obsquestion in obscure_questions:
+        total_questions = total_questions + 1
         question = obsquestion['prompt']
         choices = obsquestion['choices']
 
@@ -162,3 +165,7 @@ if __name__ == "__main__":
         print(f"Answer: {answer}")
         print(f"Correct Answer: {obsquestion['correct_answer']}")
         print("----------------------------------\n")
+        
+        if obsquestion['correct_answer'] == answer:
+            correct_answers = correct_answers + 1
+    print(f"Total Accuracy: {(correct_answers/total_questions) * 100}%")
