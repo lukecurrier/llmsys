@@ -6,3 +6,5 @@ transformers
 huggingface_hub 
 accelerate 
 torch
+kokoro
+soundfile
