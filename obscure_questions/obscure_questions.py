@@ -11,6 +11,7 @@ from typing import List
 
 model = AutoModel.from_pretrained("answerdotai/ModernBERT-base")
 tokenizer = AutoTokenizer.from_pretrained("answerdotai/ModernBERT-base")
+
 CUSTOM_STOP_WORDS = {
     'a', 'an', 'the', 'and', 'or', 'but', 'if', 'while', 'with', 'of', 'at', 'by',
     'for', 'to', 'in', 'on', 'is', 'it', 'this', 'that', 'these', 'those', 'as',
@@ -38,6 +39,7 @@ obscure_questions = load_dataset("nuprl/engineering-llm-systems", name="obscure_
 def preprocess_text(text: str):
     tokens = text.lower().split()  # Simple whitespace tokenization
     return [token.strip(".,!?()[]{}\"'") for token in tokens if token not in CUSTOM_STOP_WORDS]
+
 
 @lru_cache(maxsize=10000)
 def term_frequency(document: str, term: str):
