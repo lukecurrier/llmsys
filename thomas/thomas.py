@@ -2,10 +2,12 @@ from openai import OpenAI
 from datasets import load_dataset
 import datetime
 import re
+import os
 from typing import List, Optional
 from contextlib import redirect_stdout
 import io
 import argparse
+from dotenv import load_dotenv
 
 # Load the dataset
 FLIGHT_DATASET = load_dataset("nuprl/engineering-llm-systems", name="flights", split="train")
@@ -159,10 +161,12 @@ else:
 
 def main():
     parser = argparse.ArgumentParser(description="Thomas the Travel Agent")
-    parser.add_argument('model', help="The model to use")
+    parser.add_argument('--model', help="The model to use", default="llama3p1-8b-instruct")
+    load_dotenv()
+    api_key=os.getenv("OPENAI_API_KEY")
     args = parser.parse_args()
+    run_chat(api_key, args.model)
     
-
 if __name__ == "__main__":
     main()
     

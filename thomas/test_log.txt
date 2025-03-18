@@ -1,329 +1,34 @@
 
-Test 12
-Success: True
+Test 84
+Success: False
 Messages: ['What are hte flights form BOS to SFO on February 5st?', 'Can i book the first one?']
 Expected: [3067]
-Got: [3067]
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 3067, Departure Time: 05:29, Available Seats: 161
-Flight ID: 3068, Departure Time: 18:12, Available Seats: 0
-Flight ID: 3069, Departure Time: 00:17, Available Seats: 195
-Flight ID: 3070, Departure Time: 19:46, Available Seats: 90
-
-User (blank to quit):Booking for flight 3067 succesful
-
-User (blank to quit):[3067]
-
---------------------------------------------------------------------------------
-
-Test 27
-Success: True
-Messages: ['What are the flights from BOS to SFO on February 11?', 'Book the two earliest ones.']
-Expected: [3584, 3585]
-Got: [3584, 3585]
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 3584, Departure Time: 05:29, Available Seats: 53
-Flight ID: 3585, Departure Time: 18:12, Available Seats: 170
-Flight ID: 3586, Departure Time: 19:46, Available Seats: 60
-
-User (blank to quit):Booking for flight 3584 and 3585 successful
-
-User (blank to quit):[3584, 3585]
-
---------------------------------------------------------------------------------
-
-Test 28
-Success: True
-Messages: ['What are the flights from BOS to SFO on February 5?', 'Book flights 3069 and 3067 please!', 'Now book flight 3068.']
-Expected: [3069, 3067]
-Got: [3069, 3067]
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 3067, Departure Time: 05:29, Available Seats: 161
-Flight ID: 3068, Departure Time: 18:12, Available Seats: 0
-Flight ID: 3069, Departure Time: 00:17, Available Seats: 195
-Flight ID: 3070, Departure Time: 19:46, Available Seats: 90
-
-User (blank to quit):Booking for flight 3069 and 3067 successful
-
-User (blank to quit):Flight could not be booked. Please choose a different flight.
-
-User (blank to quit):[3069, 3067]
-
---------------------------------------------------------------------------------
-
-Test 20
-Success: True
-Messages: ['What are the flights from Boston to Dallas on January 1?', 'Book the second one, thanks.']
-Expected: [2]
-Got: [2]
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 1, Departure Time: 02:57, Available Seats: 0
-Flight ID: 2, Departure Time: 15:21, Available Seats: 185
-
-User (blank to quit):Booking for flight 2 successful
-
-User (blank to quit):[2]
-
---------------------------------------------------------------------------------
-
-Test 13
-Success: False
-Messages: ['What are hte flights form BOS to SFO on February 5st?', 'Book all the flights with available seats']
-Expected: [3067, 3069, 3070]
 Got: []
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 3067, Departure Time: 05:29, Available Seats: 161
-Flight ID: 3068, Departure Time: 18:12, Available Seats: 0
-Flight ID: 3069, Departure Time: 00:17, Available Seats: 195
-Flight ID: 3070, Departure Time: 19:46, Available Seats: 90
-
-User (blank to quit):Error: name 'flights' is not defined
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
 
 --------------------------------------------------------------------------------
 
-Test 35
-Success: True
-Messages: ['What flights are available from boston to miami on feburary 28?', "I'll book the second one"]
-Expected: []
-Got: []
-Stdout: User (blank to quit):No flights available.
-
-User (blank to quit):You didn't book the second one earlier. You can't book a flight that doesn't exist.
-User (blank to quit):[]
-
---------------------------------------------------------------------------------
-
-Test 36
+Test 54
 Success: True
 Messages: ['What flights are available from boston to miami on feburary 31st?', "I'll book the second one"]
 Expected: []
 Got: []
-Stdout: User (blank to quit):Error: day is out of range for month
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
 
 --------------------------------------------------------------------------------
 
-Test 21
-Success: True
-Messages: ['What are the flights from BOS to SFO on January 6?', "Thanks, that's all.", '']
-Expected: []
-Got: []
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 474, Departure Time: 05:29, Available Seats: 0
-Flight ID: 475, Departure Time: 18:12, Available Seats: 90
-Flight ID: 476, Departure Time: 00:17, Available Seats: 0
-
-User (blank to quit):It was a pleasure assisting you with booking flights. If you need any more help in the future, feel free to reach out. Have a great day!
-User (blank to quit):[]
-
---------------------------------------------------------------------------------
-
-Test 4
-Success: True
-Messages: ['What flights are there from the MA capital to the bay area on the last day of january?', 'Book the second one.']
-Expected: [2631]
-Got: [2631]
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 2630, Departure Time: 05:29, Available Seats: 118
-Flight ID: 2631, Departure Time: 00:17, Available Seats: 66
-Flight ID: 2632, Departure Time: 19:46, Available Seats: 0
-
-User (blank to quit):Booking for flight 2631 succesful
-
-User (blank to quit):[2631]
-
---------------------------------------------------------------------------------
-
-Test 5
-Success: True
-Messages: ['Can you book me a train trip from boston to nyc on january 10th?', 'Book the first one.']
-Expected: []
-Got: []
-Stdout: User (blank to quit):Unfortunately, I'm a travel agent specializing in flights, not trains. I don't have the capability to book train trips. However, I can suggest some options for you to book a train trip from Boston to NYC on January 10th. You can try visiting websites like Amtrak or Trainline to book your ticket.
-User (blank to quit):I can't help you with that. I'm a travel agent specializing in flights, not trains.
-User (blank to quit):[]
-
---------------------------------------------------------------------------------
-
-Test 29
-Success: True
-Messages: ['Are there any flights from JFK to denver on october 9?', 'Book it.']
-Expected: [24389]
-Got: [24389]
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 24389, Departure Time: 14:37, Available Seats: 59
-
-User (blank to quit):Booking for flight 24389 succesful
-
-User (blank to quit):[24389]
-
---------------------------------------------------------------------------------
-
-Test 22
-Success: True
-Messages: ['What flights are there from the MA capital to the bay area on the last day of january?', 'Book the second one.']
-Expected: [2631]
-Got: [2631]
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 2630, Departure Time: 05:29, Available Seats: 118
-Flight ID: 2631, Departure Time: 00:17, Available Seats: 66
-Flight ID: 2632, Departure Time: 19:46, Available Seats: 0
-
-User (blank to quit):Booking for flight 2631 succesful
-
-User (blank to quit):[2631]
-
---------------------------------------------------------------------------------
-
-Test 6
+Test 114
 Success: False
 Messages: ['What is the earliest flight from boston on january 1', 'Book it']
 Expected: [2]
 Got: []
-Stdout: User (blank to quit):The earliest flight from Boston on January 1 is Flight ID: 9, Departure Time: 04:08, Available Seats: 0
-
-User (blank to quit):Flight could not be booked. Please choose a different flight.
-
-User (blank to quit):[]
-
---------------------------------------------------------------------------------
-
-Test 30
-Success: True
-Messages: ['What are hte flights form BOS to SFO on February 5st?', 'Can i book the first one?']
-Expected: [3067]
-Got: [3067]
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 3067, Departure Time: 05:29, Available Seats: 161
-Flight ID: 3068, Departure Time: 18:12, Available Seats: 0
-Flight ID: 3069, Departure Time: 00:17, Available Seats: 195
-Flight ID: 3070, Departure Time: 19:46, Available Seats: 90
-
-User (blank to quit):Booking for flight 3067 succesful
-
-User (blank to quit):[3067]
-
---------------------------------------------------------------------------------
-
-Test 14
-Success: True
-Messages: ['What are the flights from Boston to Dallas on January 1?', 'Which one is the earliest?', 'Can I book this one?', 'Book the earliest one that has seats available']
-Expected: [2]
-Got: [2]
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 1, Departure Time: 02:57, Available Seats: 0
-Flight ID: 2, Departure Time: 15:21, Available Seats: 185
-
-User (blank to quit):The earliest flight is Flight ID: 1, Departure Time: 02:57.
-User (blank to quit):Flight could not be booked. Please choose a different flight.
-
-User (blank to quit):Available Flights:
-Flight ID: 2, Departure Time: 15:21, Available Seats: 185
-Booking for flight 2 succesful
-
-User (blank to quit):[2]
-
---------------------------------------------------------------------------------
-
-Test 23
-Success: True
-Messages: ['Can you book me a train trip from boston to nyc on january 10th?', 'Book the first one.']
-Expected: []
-Got: []
-Stdout: User (blank to quit):Unfortunately, I'm a travel agent specializing in flights, not trains. I don't have the capability to book train trips. However, I can suggest some options for you to book a train trip from Boston to NYC on January 10th. You can try visiting websites like Amtrak or Trainline to book your ticket.
-User (blank to quit):I can't help you with that. I'm a travel agent specializing in flights, not trains.
-User (blank to quit):[]
-
---------------------------------------------------------------------------------
-
-Test 7
-Success: True
-Messages: ['what flights are there from boston to san francisco on december 29?', "Book the one that's in the evening."]
-Expected: [31381]
-Got: [31381]
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 31380, Departure Time: 05:29, Available Seats: 125
-Flight ID: 31381, Departure Time: 18:12, Available Seats: 124
-Flight ID: 31382, Departure Time: 00:17, Available Seats: 23
-
-User (blank to quit):Booking for flight 31381 succesful
-
-User (blank to quit):[31381]
-
---------------------------------------------------------------------------------
-
-Test 15
-Success: True
-Messages: ['What are the flights from Boston to Dallas on January 1?', "I'll book the second one", 'Are there flights from Dallas to Boston on January 2?', 'I will book flight 163 as well']
-Expected: [2, 163]
-Got: [2, 163]
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 1, Departure Time: 02:57, Available Seats: 0
-Flight ID: 2, Departure Time: 15:21, Available Seats: 185
-
-User (blank to quit):Booking for flight 2 succesful
-
-User (blank to quit):Available Flights:
-Flight ID: 163, Departure Time: 08:42, Available Seats: 69
-
-User (blank to quit):Booking for flight 163 succesful
-
-User (blank to quit):[2, 163]
-
---------------------------------------------------------------------------------
-
-Test 31
-Success: False
-Messages: ['What are hte flights form BOS to SFO on February 5st?', 'Book all the flights with available seats']
-Expected: [3067, 3069, 3070]
-Got: []
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 3067, Departure Time: 05:29, Available Seats: 161
-Flight ID: 3068, Departure Time: 18:12, Available Seats: 0
-Flight ID: 3069, Departure Time: 00:17, Available Seats: 195
-Flight ID: 3070, Departure Time: 19:46, Available Seats: 90
-
-User (blank to quit):Error: name 'flights' is not defined
-
---------------------------------------------------------------------------------
-
-Test 16
-Success: True
-Messages: ['What flights are available from boston to miami on feburary 28?', "I'll book the second one"]
-Expected: []
-Got: []
-Stdout: User (blank to quit):No flights available.
-
-User (blank to quit):You didn't book the second one earlier. You can't book a flight that doesn't exist.
-User (blank to quit):[]
-
---------------------------------------------------------------------------------
-
-Test 1
-Success: True
-Messages: ['What are the flights from Boston to Dallas on January 1?', 'Book the first one, thanks.']
-Expected: []
-Got: []
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 1, Departure Time: 02:57, Available Seats: 0
-Flight ID: 2, Departure Time: 15:21, Available Seats: 185
-
-User (blank to quit):Flight could not be booked. Please choose a different flight.
-
-User (blank to quit):[]
-
---------------------------------------------------------------------------------
-
-Test 8
-Success: False
-Messages: ['what flights are there from boston to san francisco on december 29?', 'Book the earliest one in the day']
-Expected: [31382]
-Got: []
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 31380, Departure Time: 05:29, Available Seats: 125
-Flight ID: 31381, Departure Time: 18:12, Available Seats: 124
-Flight ID: 31382, Departure Time: 00:17, Available Seats: 23
-
-User (blank to quit):Error: name 'flights' is not defined
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
 
 --------------------------------------------------------------------------------
 
@@ -332,138 +37,86 @@ Success: False
 Messages: ['What is the earliest flight from boston on january 1', 'Book it']
 Expected: [2]
 Got: []
-Stdout: User (blank to quit):The earliest flight from Boston on January 1 is Flight ID: 9, Departure Time: 04:08, Available Seats: 0
-
-User (blank to quit):Flight could not be booked. Please choose a different flight.
-
-User (blank to quit):[]
-
---------------------------------------------------------------------------------
-
-Test 17
-Success: True
-Messages: ['What flights are available from boston to miami on feburary 28?', "I'll book the second one"]
-Expected: []
-Got: []
-Stdout: User (blank to quit):No flights available.
-
-User (blank to quit):You didn't book the second one earlier. You can't book a flight that doesn't exist.
-User (blank to quit):[]
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
 
 --------------------------------------------------------------------------------
 
 Test 25
-Success: True
+Success: False
 Messages: ['what flights are there from boston to san francisco on december 29?', "Book the one that's in the evening."]
 Expected: [31381]
-Got: [31381]
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 31380, Departure Time: 05:29, Available Seats: 125
-Flight ID: 31381, Departure Time: 18:12, Available Seats: 124
-Flight ID: 31382, Departure Time: 00:17, Available Seats: 23
-
-User (blank to quit):Booking for flight 31381 succesful
-
-User (blank to quit):[31381]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
 
 --------------------------------------------------------------------------------
 
-Test 10
-Success: True
-Messages: ['What are the flights from BOS to SFO on February 5?', 'Book flights 3069 and 3067 please!', 'Now book flight 3068.']
-Expected: [3069, 3067]
-Got: [3069, 3067]
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 3067, Departure Time: 05:29, Available Seats: 161
-Flight ID: 3068, Departure Time: 18:12, Available Seats: 0
-Flight ID: 3069, Departure Time: 00:17, Available Seats: 195
-Flight ID: 3070, Departure Time: 19:46, Available Seats: 90
-
-User (blank to quit):Booking for flight 3069 and 3067 successful
-
-User (blank to quit):Flight could not be booked. Please choose a different flight.
-
-User (blank to quit):[3069, 3067]
+Test 85
+Success: False
+Messages: ['What are hte flights form BOS to SFO on February 5st?', 'Book all the flights with available seats']
+Expected: [3067, 3069, 3070]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
 
 --------------------------------------------------------------------------------
 
-Test 32
-Success: True
-Messages: ['What are the flights from Boston to Dallas on January 1?', 'Which one is the earliest?', 'Can I book this one?', 'Book the earliest one that has seats available']
-Expected: [2]
-Got: [2]
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 1, Departure Time: 02:57, Available Seats: 0
-Flight ID: 2, Departure Time: 15:21, Available Seats: 185
-
-User (blank to quit):The earliest flight is Flight ID: 1, Departure Time: 02:57.
-User (blank to quit):Flight could not be booked. Please choose a different flight.
-
-User (blank to quit):Available Flights:
-Flight ID: 2, Departure Time: 15:21, Available Seats: 185
-Booking for flight 2 succesful
-
-User (blank to quit):[2]
+Test 174
+Success: False
+Messages: ['What are hte flights form BOS to SFO on February 5st?', 'Can i book the first one?']
+Expected: [3067]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
 
 --------------------------------------------------------------------------------
 
-Test 9
-Success: True
-Messages: ['What are the flights from BOS to SFO on February 11?', 'Book the two earliest ones.']
-Expected: [3584, 3585]
-Got: [3584, 3585]
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 3584, Departure Time: 05:29, Available Seats: 53
-Flight ID: 3585, Departure Time: 18:12, Available Seats: 170
-Flight ID: 3586, Departure Time: 19:46, Available Seats: 60
-
-User (blank to quit):Booking for flight 3584 and 3585 successful
-
-User (blank to quit):[3584, 3585]
-
---------------------------------------------------------------------------------
-
-Test 18
+Test 144
 Success: True
 Messages: ['What flights are available from boston to miami on feburary 31st?', "I'll book the second one"]
 Expected: []
 Got: []
-Stdout: User (blank to quit):Error: day is out of range for month
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
 
 --------------------------------------------------------------------------------
 
-Test 2
-Success: True
-Messages: ['What are the flights from Boston to Dallas on January 1?', 'Book the second one, thanks.']
-Expected: [2]
-Got: [2]
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 1, Departure Time: 02:57, Available Seats: 0
-Flight ID: 2, Departure Time: 15:21, Available Seats: 185
-
-User (blank to quit):Booking for flight 2 successful
-
-User (blank to quit):[2]
+Test 175
+Success: False
+Messages: ['What are hte flights form BOS to SFO on February 5st?', 'Book all the flights with available seats']
+Expected: [3067, 3069, 3070]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
 
 --------------------------------------------------------------------------------
 
-Test 33
+Test 115
+Success: False
+Messages: ['what flights are there from boston to san francisco on december 29?', "Book the one that's in the evening."]
+Expected: [31381]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 145
 Success: True
-Messages: ['What are the flights from Boston to Dallas on January 1?', "I'll book the second one", 'Are there flights from Dallas to Boston on January 2?', 'I will book flight 163 as well']
-Expected: [2, 163]
-Got: [2, 163]
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 1, Departure Time: 02:57, Available Seats: 0
-Flight ID: 2, Departure Time: 15:21, Available Seats: 185
-
-User (blank to quit):Booking for flight 2 succesful
-
-User (blank to quit):Available Flights:
-Flight ID: 163, Departure Time: 08:42, Available Seats: 69
-
-User (blank to quit):Booking for flight 163 succesful
-
-User (blank to quit):[2, 163]
+Messages: ['What are the flights from Boston to Dallas on January 1?', 'Book the first one, thanks.']
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
 
 --------------------------------------------------------------------------------
 
@@ -472,26 +125,526 @@ Success: False
 Messages: ['what flights are there from boston to san francisco on december 29?', 'Book the earliest one in the day']
 Expected: [31382]
 Got: []
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 31380, Departure Time: 05:29, Available Seats: 125
-Flight ID: 31381, Departure Time: 18:12, Available Seats: 124
-Flight ID: 31382, Departure Time: 00:17, Available Seats: 23
-
-User (blank to quit):Error: name 'flights' is not defined
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
 
 --------------------------------------------------------------------------------
 
-Test 11
+Test 86
+Success: False
+Messages: ['What are the flights from Boston to Dallas on January 1?', 'Which one is the earliest?', 'Can I book this one?', 'Book the earliest one that has seats available']
+Expected: [2]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 56
+Success: False
+Messages: ['What are the flights from Boston to Dallas on January 1?', 'Book the second one, thanks.']
+Expected: [2]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 176
+Success: False
+Messages: ['What are the flights from Boston to Dallas on January 1?', 'Which one is the earliest?', 'Can I book this one?', 'Book the earliest one that has seats available']
+Expected: [2]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 55
 Success: True
+Messages: ['What are the flights from Boston to Dallas on January 1?', 'Book the first one, thanks.']
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 146
+Success: False
+Messages: ['What are the flights from Boston to Dallas on January 1?', 'Book the second one, thanks.']
+Expected: [2]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 27
+Success: False
+Messages: ['What are the flights from BOS to SFO on February 11?', 'Book the two earliest ones.']
+Expected: [3584, 3585]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 116
+Success: False
+Messages: ['what flights are there from boston to san francisco on december 29?', 'Book the earliest one in the day']
+Expected: [31382]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 87
+Success: False
+Messages: ['What are the flights from Boston to Dallas on January 1?', "I'll book the second one", 'Are there flights from Dallas to Boston on January 2?', 'I will book flight 163 as well']
+Expected: [2, 163]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 117
+Success: False
+Messages: ['What are the flights from BOS to SFO on February 11?', 'Book the two earliest ones.']
+Expected: [3584, 3585]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 57
+Success: True
+Messages: ['What are the flights from BOS to SFO on January 6?', "Thanks, that's all.", '']
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 177
+Success: False
+Messages: ['What are the flights from Boston to Dallas on January 1?', "I'll book the second one", 'Are there flights from Dallas to Boston on January 2?', 'I will book flight 163 as well']
+Expected: [2, 163]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 147
+Success: True
+Messages: ['What are the flights from BOS to SFO on January 6?', "Thanks, that's all.", '']
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 28
+Success: False
+Messages: ['What are the flights from BOS to SFO on February 5?', 'Book flights 3069 and 3067 please!', 'Now book flight 3068.']
+Expected: [3069, 3067]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 88
+Success: True
+Messages: ['What flights are available from boston to miami on feburary 28?', "I'll book the second one"]
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 118
+Success: False
+Messages: ['What are the flights from BOS to SFO on February 5?', 'Book flights 3069 and 3067 please!', 'Now book flight 3068.']
+Expected: [3069, 3067]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 178
+Success: True
+Messages: ['What flights are available from boston to miami on feburary 28?', "I'll book the second one"]
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 148
+Success: False
+Messages: ['What flights are there from the MA capital to the bay area on the last day of january?', 'Book the second one.']
+Expected: [2631]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 29
+Success: False
 Messages: ['Are there any flights from JFK to denver on october 9?', 'Book it.']
 Expected: [24389]
-Got: [24389]
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 24389, Departure Time: 14:37, Available Seats: 59
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
 
-User (blank to quit):Booking for flight 24389 succesful
+--------------------------------------------------------------------------------
 
-User (blank to quit):[24389]
+Test 58
+Success: False
+Messages: ['What flights are there from the MA capital to the bay area on the last day of january?', 'Book the second one.']
+Expected: [2631]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 89
+Success: True
+Messages: ['What flights are available from boston to miami on feburary 28?', "I'll book the second one"]
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 59
+Success: True
+Messages: ['Can you book me a train trip from boston to nyc on january 10th?', 'Book the first one.']
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 119
+Success: False
+Messages: ['Are there any flights from JFK to denver on october 9?', 'Book it.']
+Expected: [24389]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 149
+Success: True
+Messages: ['Can you book me a train trip from boston to nyc on january 10th?', 'Book the first one.']
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 179
+Success: True
+Messages: ['What flights are available from boston to miami on feburary 28?', "I'll book the second one"]
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 90
+Success: True
+Messages: ['What flights are available from boston to miami on feburary 31st?', "I'll book the second one"]
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 30
+Success: False
+Messages: ['What are hte flights form BOS to SFO on February 5st?', 'Can i book the first one?']
+Expected: [3067]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 60
+Success: False
+Messages: ['What is the earliest flight from boston on january 1', 'Book it']
+Expected: [2]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 120
+Success: False
+Messages: ['What are hte flights form BOS to SFO on February 5st?', 'Can i book the first one?']
+Expected: [3067]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 180
+Success: True
+Messages: ['What flights are available from boston to miami on feburary 31st?', "I'll book the second one"]
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 150
+Success: False
+Messages: ['What is the earliest flight from boston on january 1', 'Book it']
+Expected: [2]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 31
+Success: False
+Messages: ['What are hte flights form BOS to SFO on February 5st?', 'Book all the flights with available seats']
+Expected: [3067, 3069, 3070]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 91
+Success: True
+Messages: ['What are the flights from Boston to Dallas on January 1?', 'Book the first one, thanks.']
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 1
+Success: True
+Messages: ['What are the flights from Boston to Dallas on January 1?', 'Book the first one, thanks.']
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 121
+Success: False
+Messages: ['What are hte flights form BOS to SFO on February 5st?', 'Book all the flights with available seats']
+Expected: [3067, 3069, 3070]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 32
+Success: False
+Messages: ['What are the flights from Boston to Dallas on January 1?', 'Which one is the earliest?', 'Can I book this one?', 'Book the earliest one that has seats available']
+Expected: [2]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 92
+Success: False
+Messages: ['What are the flights from Boston to Dallas on January 1?', 'Book the second one, thanks.']
+Expected: [2]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 10
+Success: False
+Messages: ['What are the flights from BOS to SFO on February 5?', 'Book flights 3069 and 3067 please!', 'Now book flight 3068.']
+Expected: [3069, 3067]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 62
+Success: False
+Messages: ['what flights are there from boston to san francisco on december 29?', 'Book the earliest one in the day']
+Expected: [31382]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 122
+Success: False
+Messages: ['What are the flights from Boston to Dallas on January 1?', 'Which one is the earliest?', 'Can I book this one?', 'Book the earliest one that has seats available']
+Expected: [2]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 61
+Success: False
+Messages: ['what flights are there from boston to san francisco on december 29?', "Book the one that's in the evening."]
+Expected: [31381]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 152
+Success: False
+Messages: ['what flights are there from boston to san francisco on december 29?', 'Book the earliest one in the day']
+Expected: [31382]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 151
+Success: False
+Messages: ['what flights are there from boston to san francisco on december 29?', "Book the one that's in the evening."]
+Expected: [31381]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 33
+Success: False
+Messages: ['What are the flights from Boston to Dallas on January 1?', "I'll book the second one", 'Are there flights from Dallas to Boston on January 2?', 'I will book flight 163 as well']
+Expected: [2, 163]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 63
+Success: False
+Messages: ['What are the flights from BOS to SFO on February 11?', 'Book the two earliest ones.']
+Expected: [3584, 3585]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 2
+Success: False
+Messages: ['What are the flights from Boston to Dallas on January 1?', 'Book the second one, thanks.']
+Expected: [2]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 123
+Success: False
+Messages: ['What are the flights from Boston to Dallas on January 1?', "I'll book the second one", 'Are there flights from Dallas to Boston on January 2?', 'I will book flight 163 as well']
+Expected: [2, 163]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 153
+Success: False
+Messages: ['What are the flights from BOS to SFO on February 11?', 'Book the two earliest ones.']
+Expected: [3584, 3585]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
 
 --------------------------------------------------------------------------------
 
@@ -500,25 +653,20 @@ Success: True
 Messages: ['What flights are available from boston to miami on feburary 28?', "I'll book the second one"]
 Expected: []
 Got: []
-Stdout: User (blank to quit):No flights available.
-
-User (blank to quit):You didn't book the second one earlier. You can't book a flight that doesn't exist.
-User (blank to quit):[]
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
 
 --------------------------------------------------------------------------------
 
-Test 19
-Success: True
-Messages: ['What are the flights from Boston to Dallas on January 1?', 'Book the first one, thanks.']
-Expected: []
+Test 94
+Success: False
+Messages: ['What flights are there from the MA capital to the bay area on the last day of january?', 'Book the second one.']
+Expected: [2631]
 Got: []
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 1, Departure Time: 02:57, Available Seats: 0
-Flight ID: 2, Departure Time: 15:21, Available Seats: 185
-
-User (blank to quit):Flight could not be booked. Please choose a different flight.
-
-User (blank to quit):[]
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
 
 --------------------------------------------------------------------------------
 
@@ -527,12 +675,835 @@ Success: True
 Messages: ['What are the flights from BOS to SFO on January 6?', "Thanks, that's all.", '']
 Expected: []
 Got: []
-Stdout: User (blank to quit):Available Flights:
-Flight ID: 474, Departure Time: 05:29, Available Seats: 0
-Flight ID: 475, Departure Time: 18:12, Available Seats: 90
-Flight ID: 476, Departure Time: 00:17, Available Seats: 0
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
 
-User (blank to quit):It was a pleasure assisting you with booking flights. If you need any more help in the future, feel free to reach out. Have a great day!
-User (blank to quit):[]
+--------------------------------------------------------------------------------
+
+Test 64
+Success: False
+Messages: ['What are the flights from BOS to SFO on February 5?', 'Book flights 3069 and 3067 please!', 'Now book flight 3068.']
+Expected: [3069, 3067]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 124
+Success: True
+Messages: ['What flights are available from boston to miami on feburary 28?', "I'll book the second one"]
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 35
+Success: True
+Messages: ['What flights are available from boston to miami on feburary 28?', "I'll book the second one"]
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 95
+Success: True
+Messages: ['Can you book me a train trip from boston to nyc on january 10th?', 'Book the first one.']
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 93
+Success: True
+Messages: ['What are the flights from BOS to SFO on January 6?', "Thanks, that's all.", '']
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 4
+Success: False
+Messages: ['What flights are there from the MA capital to the bay area on the last day of january?', 'Book the second one.']
+Expected: [2631]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 65
+Success: False
+Messages: ['Are there any flights from JFK to denver on october 9?', 'Book it.']
+Expected: [24389]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 125
+Success: True
+Messages: ['What flights are available from boston to miami on feburary 28?', "I'll book the second one"]
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 154
+Success: False
+Messages: ['What are the flights from BOS to SFO on February 5?', 'Book flights 3069 and 3067 please!', 'Now book flight 3068.']
+Expected: [3069, 3067]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 155
+Success: False
+Messages: ['Are there any flights from JFK to denver on october 9?', 'Book it.']
+Expected: [24389]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 36
+Success: True
+Messages: ['What flights are available from boston to miami on feburary 31st?', "I'll book the second one"]
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 96
+Success: False
+Messages: ['What is the earliest flight from boston on january 1', 'Book it']
+Expected: [2]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 5
+Success: True
+Messages: ['Can you book me a train trip from boston to nyc on january 10th?', 'Book the first one.']
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 66
+Success: False
+Messages: ['What are hte flights form BOS to SFO on February 5st?', 'Can i book the first one?']
+Expected: [3067]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 126
+Success: True
+Messages: ['What flights are available from boston to miami on feburary 31st?', "I'll book the second one"]
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 156
+Success: False
+Messages: ['What are hte flights form BOS to SFO on February 5st?', 'Can i book the first one?']
+Expected: [3067]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 37
+Success: True
+Messages: ['What are the flights from Boston to Dallas on January 1?', 'Book the first one, thanks.']
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 97
+Success: False
+Messages: ['what flights are there from boston to san francisco on december 29?', "Book the one that's in the evening."]
+Expected: [31381]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 6
+Success: False
+Messages: ['What is the earliest flight from boston on january 1', 'Book it']
+Expected: [2]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 67
+Success: False
+Messages: ['What are hte flights form BOS to SFO on February 5st?', 'Book all the flights with available seats']
+Expected: [3067, 3069, 3070]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 127
+Success: True
+Messages: ['What are the flights from Boston to Dallas on January 1?', 'Book the first one, thanks.']
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 157
+Success: False
+Messages: ['What are hte flights form BOS to SFO on February 5st?', 'Book all the flights with available seats']
+Expected: [3067, 3069, 3070]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 38
+Success: False
+Messages: ['What are the flights from Boston to Dallas on January 1?', 'Book the second one, thanks.']
+Expected: [2]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 7
+Success: False
+Messages: ['what flights are there from boston to san francisco on december 29?', "Book the one that's in the evening."]
+Expected: [31381]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 98
+Success: False
+Messages: ['what flights are there from boston to san francisco on december 29?', 'Book the earliest one in the day']
+Expected: [31382]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 128
+Success: False
+Messages: ['What are the flights from Boston to Dallas on January 1?', 'Book the second one, thanks.']
+Expected: [2]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 39
+Success: True
+Messages: ['What are the flights from BOS to SFO on January 6?', "Thanks, that's all.", '']
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 158
+Success: False
+Messages: ['What are the flights from Boston to Dallas on January 1?', 'Which one is the earliest?', 'Can I book this one?', 'Book the earliest one that has seats available']
+Expected: [2]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 99
+Success: False
+Messages: ['What are the flights from BOS to SFO on February 11?', 'Book the two earliest ones.']
+Expected: [3584, 3585]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 69
+Success: False
+Messages: ['What are the flights from Boston to Dallas on January 1?', "I'll book the second one", 'Are there flights from Dallas to Boston on January 2?', 'I will book flight 163 as well']
+Expected: [2, 163]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 129
+Success: True
+Messages: ['What are the flights from BOS to SFO on January 6?', "Thanks, that's all.", '']
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 159
+Success: False
+Messages: ['What are the flights from Boston to Dallas on January 1?', "I'll book the second one", 'Are there flights from Dallas to Boston on January 2?', 'I will book flight 163 as well']
+Expected: [2, 163]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 40
+Success: False
+Messages: ['What flights are there from the MA capital to the bay area on the last day of january?', 'Book the second one.']
+Expected: [2631]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 100
+Success: False
+Messages: ['What are the flights from BOS to SFO on February 5?', 'Book flights 3069 and 3067 please!', 'Now book flight 3068.']
+Expected: [3069, 3067]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 9
+Success: False
+Messages: ['What are the flights from BOS to SFO on February 11?', 'Book the two earliest ones.']
+Expected: [3584, 3585]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 70
+Success: True
+Messages: ['What flights are available from boston to miami on feburary 28?', "I'll book the second one"]
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 68
+Success: False
+Messages: ['What are the flights from Boston to Dallas on January 1?', 'Which one is the earliest?', 'Can I book this one?', 'Book the earliest one that has seats available']
+Expected: [2]
+Got: []
+Stdout: 
+Stderr: Using the latest cached version of the dataset since nuprl/engineering-llm-systems couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'flights' at /Users/lsc/.cache/huggingface/datasets/nuprl___engineering-llm-systems/flights/0.0.0/3a16341be43d40fe854aa45cbefcb1a1221e563a (last modified on Mon Feb 17 09:56:11 2025).
+usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 130
+Success: False
+Messages: ['What flights are there from the MA capital to the bay area on the last day of january?', 'Book the second one.']
+Expected: [2631]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 160
+Success: True
+Messages: ['What flights are available from boston to miami on feburary 28?', "I'll book the second one"]
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 41
+Success: True
+Messages: ['Can you book me a train trip from boston to nyc on january 10th?', 'Book the first one.']
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 11
+Success: False
+Messages: ['Are there any flights from JFK to denver on october 9?', 'Book it.']
+Expected: [24389]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 101
+Success: False
+Messages: ['Are there any flights from JFK to denver on october 9?', 'Book it.']
+Expected: [24389]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 71
+Success: True
+Messages: ['What flights are available from boston to miami on feburary 28?', "I'll book the second one"]
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 161
+Success: True
+Messages: ['What flights are available from boston to miami on feburary 28?', "I'll book the second one"]
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 131
+Success: True
+Messages: ['Can you book me a train trip from boston to nyc on january 10th?', 'Book the first one.']
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 42
+Success: False
+Messages: ['What is the earliest flight from boston on january 1', 'Book it']
+Expected: [2]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 102
+Success: False
+Messages: ['What are hte flights form BOS to SFO on February 5st?', 'Can i book the first one?']
+Expected: [3067]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 12
+Success: False
+Messages: ['What are hte flights form BOS to SFO on February 5st?', 'Can i book the first one?']
+Expected: [3067]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 72
+Success: True
+Messages: ['What flights are available from boston to miami on feburary 31st?', "I'll book the second one"]
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 8
+Success: False
+Messages: ['what flights are there from boston to san francisco on december 29?', 'Book the earliest one in the day']
+Expected: [31382]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 162
+Success: True
+Messages: ['What flights are available from boston to miami on feburary 31st?', "I'll book the second one"]
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 132
+Success: False
+Messages: ['What is the earliest flight from boston on january 1', 'Book it']
+Expected: [2]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 43
+Success: False
+Messages: ['what flights are there from boston to san francisco on december 29?', "Book the one that's in the evening."]
+Expected: [31381]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 103
+Success: False
+Messages: ['What are hte flights form BOS to SFO on February 5st?', 'Book all the flights with available seats']
+Expected: [3067, 3069, 3070]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 13
+Success: False
+Messages: ['What are hte flights form BOS to SFO on February 5st?', 'Book all the flights with available seats']
+Expected: [3067, 3069, 3070]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 73
+Success: True
+Messages: ['What are the flights from Boston to Dallas on January 1?', 'Book the first one, thanks.']
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 133
+Success: False
+Messages: ['what flights are there from boston to san francisco on december 29?', "Book the one that's in the evening."]
+Expected: [31381]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 163
+Success: True
+Messages: ['What are the flights from Boston to Dallas on January 1?', 'Book the first one, thanks.']
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 44
+Success: False
+Messages: ['what flights are there from boston to san francisco on december 29?', 'Book the earliest one in the day']
+Expected: [31382]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 104
+Success: False
+Messages: ['What are the flights from Boston to Dallas on January 1?', 'Which one is the earliest?', 'Can I book this one?', 'Book the earliest one that has seats available']
+Expected: [2]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 14
+Success: False
+Messages: ['What are the flights from Boston to Dallas on January 1?', 'Which one is the earliest?', 'Can I book this one?', 'Book the earliest one that has seats available']
+Expected: [2]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 164
+Success: False
+Messages: ['What are the flights from Boston to Dallas on January 1?', 'Book the second one, thanks.']
+Expected: [2]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 45
+Success: False
+Messages: ['What are the flights from BOS to SFO on February 11?', 'Book the two earliest ones.']
+Expected: [3584, 3585]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 15
+Success: False
+Messages: ['What are the flights from Boston to Dallas on January 1?', "I'll book the second one", 'Are there flights from Dallas to Boston on January 2?', 'I will book flight 163 as well']
+Expected: [2, 163]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 105
+Success: False
+Messages: ['What are the flights from Boston to Dallas on January 1?', "I'll book the second one", 'Are there flights from Dallas to Boston on January 2?', 'I will book flight 163 as well']
+Expected: [2, 163]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 74
+Success: False
+Messages: ['What are the flights from Boston to Dallas on January 1?', 'Book the second one, thanks.']
+Expected: [2]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 134
+Success: False
+Messages: ['what flights are there from boston to san francisco on december 29?', 'Book the earliest one in the day']
+Expected: [31382]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 75
+Success: True
+Messages: ['What are the flights from BOS to SFO on January 6?', "Thanks, that's all.", '']
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 165
+Success: True
+Messages: ['What are the flights from BOS to SFO on January 6?', "Thanks, that's all.", '']
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 135
+Success: False
+Messages: ['What are the flights from BOS to SFO on February 11?', 'Book the two earliest ones.']
+Expected: [3584, 3585]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 76
+Success: False
+Messages: ['What flights are there from the MA capital to the bay area on the last day of january?', 'Book the second one.']
+Expected: [2631]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 16
+Success: True
+Messages: ['What flights are available from boston to miami on feburary 28?', "I'll book the second one"]
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 136
+Success: False
+Messages: ['What are the flights from BOS to SFO on February 5?', 'Book flights 3069 and 3067 please!', 'Now book flight 3068.']
+Expected: [3069, 3067]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 47
+Success: False
+Messages: ['Are there any flights from JFK to denver on october 9?', 'Book it.']
+Expected: [24389]
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
+
+--------------------------------------------------------------------------------
+
+Test 106
+Success: True
+Messages: ['What flights are available from boston to miami on feburary 28?', "I'll book the second one"]
+Expected: []
+Got: []
+Stdout: 
+Stderr: usage: thomas.py [-h] [--model MODEL]
+thomas.py: error: unrecognized arguments: llama3p1-8b-instruct
 
 --------------------------------------------------------------------------------

@@ -53,7 +53,6 @@ async def run_test(
     user_messages: List[str],
     expected_result: List[int],
 ) -> Tuple[bool, str]:
-    # Start the agent process
     process = await asyncio.create_subprocess_exec(
         "python3",
         "thomas.py",
@@ -70,8 +69,8 @@ async def run_test(
         stdout = stdout.decode("utf-8")
         stderr = stderr.decode("utf-8")
 
-        # Extract the last line which should contain booked flights
-        # Extract list of flight IDs using regex
+        # extract the last line which should contain booked flights
+        # extract list of flight IDs using regex
         match = re.search(r"\[([\d,\s]*)\]$", stdout.strip())
         if match:
             booked_flights = [
@@ -108,14 +107,14 @@ async def main_with_args(
     concurrency: int,
     num_samples: int,
 ):
-    # Load test cases from YAML file
+    # load test cases from YAML file
     with tests_file.open("r") as f:
         test_cases = yaml.safe_load(f)
 
-    # Create semaphore to limit concurrent tests
+    # create semaphore to limit concurrent tests
     sem = asyncio.Semaphore(concurrency)
 
-    # Run tests concurrently with semaphore
+    # func to run tests concurrently with semaphore
     async def run_test_with_sem(test_case, index):
         async with sem:
             success, log = await run_test(
@@ -123,13 +122,13 @@ async def main_with_args(
             )
             return success, log, index
 
-    # Create all test tasks
+    # create all test tasks
     tasks = [
         run_test_with_sem(test_case, i)
         for i, test_case in enumerate(test_cases * num_samples)
     ]
 
-    # Run all tests with progress bar
+    # run all tests with progress bar
     with tqdm.tqdm(total=len(tasks), desc="Running tests") as pbar, log_file.open(
         "w"
     ) as log_f:
@@ -144,7 +143,6 @@ async def main_with_args(
             log_f.flush()
             pbar.update(1)
 
-    # Print summary
     num_passed = sum(1 for success, _ in results if success)
     print(f"Passed {num_passed} out of {len(results)} tests")
 
@@ -179,7 +177,6 @@ def main():
             args.model, args.tests, args.log, args.concurrency, args.num_samples
         )
     )
-
 
 if __name__ == "__main__":
     main()
