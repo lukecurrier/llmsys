@@ -6,7 +6,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 load_dotenv()
 api_key = os.getenv("HUGGINGFACE_TOKEN")
 
-model_name = "google/gemma-3-27b-it" 
+model_name = "meta-llama/Llama-3.1-8B-Instruct" 
 tokenizer = AutoTokenizer.from_pretrained(model_name, token=api_key)
 model = AutoModelForCausalLM.from_pretrained(model_name, token=api_key)
 
